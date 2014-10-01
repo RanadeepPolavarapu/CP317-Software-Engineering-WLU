@@ -3,7 +3,7 @@ CP317-Assignment-1
 
 WLU CP 317 Assignment #1 - JavaScript Goblin Game
 
-Reply with your GitHub accounts to [this](https://github.com/RanadeepPolavarapu/CP317-Assignment-1/issues/1).
+Reply with your GitHub accounts to [this](https://github.com/RanadeepPolavarapu/CP317-Assignment-1/issues/1) so I can allow commits from your accounts.
 
 Help Instructions
 ==================
