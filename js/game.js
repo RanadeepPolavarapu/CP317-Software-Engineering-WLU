@@ -1,8 +1,8 @@
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.width = 512;
-canvas.height = 480;
+canvas.width = window.innerWidth / 2;
+canvas.height = window.innerHeight / 2;
 console.log('[DEBUG]: canvas.width=' + canvas.width + ' canvas.height=' + canvas.height);
 document.body.appendChild(canvas);
 
@@ -48,6 +48,17 @@ addEventListener("keyup", function(e) {
     delete keysDown[e.keyCode];
 }, false);
 
+// FUNCTION: A generic function for moving sprites within the boundaries of the canvas
+var genericMoveSprite = function(sprite, speed, modifier){
+    
+};
+
+/**
+ * Resets the game canvas.
+ * @param {Number} a 
+ * @param {Number} b
+ * @return {Number} sum
+ */
 // Reset the game when the player catches a monster
 var reset = function() {
     hero.x = canvas.width / 2;
