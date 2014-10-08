@@ -11,7 +11,7 @@
  *      Ranadeep Polavarapu - (120443120) - (pola3120@mylaurier.ca)
  *      Bruno Salapic - () - ()
  *      Lee Glendenning - () - ()
- *      Ryan Burke - () - ()
+ *      Ryan Burke - (120543180) - (burk3180@mylaurier.ca)
  * 
  * Version: Wednesday, Oct. 8, 2014
  * ========================================================== */
