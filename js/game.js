@@ -191,6 +191,24 @@ var update = function(modifier) {
     }
 };
 
+//function to calculate direction monster is moving as well as incremend/decrement its x and y position
+var moveMonster = function(){
+
+	if (xdir == 1 && monster.x >= canvas.width - 30)//heading right
+		xdir = -1;
+	else if (xdir == -1 && monster.x <= 0)//heading left
+		xdir = 1;
+		
+	if (ydir == 1 && monster.y >= canvas.height - 32)//heading down
+		ydir = -1;
+	else if (ydir == -1 && monster.y <= 0)//heading up
+		ydir = 1;
+
+	console.log("x: " + xdir + ", y: " + ydir);
+	monster.x += xdir;
+	monster.y += ydir;
+};
+
 /**
  * RENDER UTILITIES: Utilities for rendering.
  */
@@ -255,5 +273,6 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 var then = Date.now();
 reset();
 main();
+setInterval(moveMonster, 5);
 
 // ----------------- GAME -- END -- Code above is the core game code. ----------------- //
