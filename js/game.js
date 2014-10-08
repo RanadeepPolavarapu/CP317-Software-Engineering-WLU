@@ -69,7 +69,7 @@ heroImage.src = "images/hero.png";
 
 // Monster image
 var monsterHeight = 32;
-var monsterWidth = 30;
+var monsterWidth = 32;
 var xdir = 1;
 var ydir = 1;
 var monsterReady = false;
@@ -187,7 +187,10 @@ var update = function(modifier) {
 
     // Are they touching?
     if (
-        hero.x <= (monster.x + 32) && monster.x <= (hero.x + 32) && hero.y <= (monster.y + 32) && monster.y <= (hero.y + 32)
+        hero.x <= (monster.x + 32) && 
+        monster.x <= (hero.x + 32) && 
+        hero.y <= (monster.y + 32) && 
+        monster.y <= (hero.y + 32)
     ) {
         highScore.incrementHighScore();
         reset();
@@ -198,15 +201,17 @@ var update = function(modifier) {
 //function to calculate direction monster is moving as well as incremend/decrement its x and y position
 var moveMonster = function(){
 
-	if (xdir == 1 && monster.x >= canvas.width - 30)//heading right
+	if (xdir == 1 && monster.x >= canvas.width - 30) { //heading right
 		xdir = -1;
-	else if (xdir == -1 && monster.x <= 0)//heading left
+    } else if (xdir == -1 && monster.x <= 0) { //heading left
 		xdir = 1;
+    }
 		
-	if (ydir == 1 && monster.y >= canvas.height - 32)//heading down
+	if (ydir == 1 && monster.y >= canvas.height - 32) { //heading down
 		ydir = -1;
-	else if (ydir == -1 && monster.y <= 0)//heading up
+    } else if (ydir == -1 && monster.y <= 0) { //heading up
 		ydir = 1;
+    }
 
 	monster.x += xdir;
 	monster.y += ydir;
