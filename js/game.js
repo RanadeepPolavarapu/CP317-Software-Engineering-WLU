@@ -68,6 +68,10 @@ heroImage.onload = function() {
 heroImage.src = "images/hero.png";
 
 // Monster image
+var monsterHeight = 32;
+var monsterWidth = 30;
+var xdir = 1;
+var ydir = 1;
 var monsterReady = false;
 var monsterImage = new Image();
 monsterImage.onload = function() {
