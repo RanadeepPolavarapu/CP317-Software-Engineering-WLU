@@ -208,7 +208,6 @@ var moveMonster = function(){
 	else if (ydir == -1 && monster.y <= 0)//heading up
 		ydir = 1;
 
-	console.log("x: " + xdir + ", y: " + ydir);
 	monster.x += xdir;
 	monster.y += ydir;
 };
