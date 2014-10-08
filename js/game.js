@@ -252,7 +252,7 @@ var render = function() {
     ctx.font = "16px Calibri";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
-    ctx.fillText("Score: " + highScore.getHighScore(), 36, 36);
+    ctx.fillText("Score: " + highScore.getHighScore(), 40, 22);
 };
 
 // The main game loop
