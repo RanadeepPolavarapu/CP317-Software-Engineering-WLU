@@ -1,6 +1,25 @@
+/* ===================================================
+ * game.js
+ * ===================================================
+ * Written for: CP317-A
+ * 
+ * Assignment 1
+ * 
+ * Group: #4
+ * 
+ * Authors:
+ *      Ranadeep Polavarapu - (120443120) - (pola3120@mylaurier.ca)
+ *      Bruno Salapic - () - ()
+ *      Lee Glendenning - () - ()
+ *      Ryan Burke - () - ()
+ * 
+ * Version: Wednesday, Oct. 8, 2014
+ * ========================================================== */
+
 /**
  * Documentation and comments are based off Google's JavaScript style guide.
  */
+
 // ----------------- DEBUG -- START -- Code below is debugging for developer's reference. ----------------- //
 // DEBUG: Display the window's height and width just for the developer's reference.
 console.log("%c[DEBUG]: Window - height=" + window.innerHeight + ", width=" + window.innerWidth, 'font-weight: bold; color: red;');
@@ -69,7 +88,57 @@ var hero = {
     speed: 256 // movement in pixels per second
 };
 var monster = {};
-var monstersCaught = 0;
+
+/**
+ * HIGH SCORE UTILITIES: Score stored using localStorage.
+ */
+
+var highScore = {
+    createHighScore: function() {
+        localStorage.highScore = 0;
+        console.log("Scores are now persistent and stored through localStorage!");
+    },
+    
+    destroyHighScore: function() {
+        localStorage.removeItem("highScore");
+        console.log("Scores are no longer being stored through localStorage!");
+    },
+
+    getHighScore: function() {
+        if (!localStorage.highScore) {
+            // Create this item in localStorage if it doesn't exist.
+            localStorage.highScore = 0;
+        }
+        return localStorage.highScore;
+    },
+
+    setHighScore: function(score) {
+        // Doesn't matter if highScore is already set or not in localStorage. Create it if it doesn't exist.
+        localStorage.highScore = parseInt(score);
+    },
+
+    incrementHighScore: function() {
+        // Increment highScore by 1.
+        if (!localStorage.highScore) {
+            // Create this item in localStorage if it doesn't exist.
+            localStorage.highScore = 0;
+        }
+        localStorage.highScore = parseInt(localStorage.highScore) + 1;
+    },
+    
+    decrementHighScore: function() {
+        // Decrement highScore by 1.
+        if (!localStorage.highScore) {
+            // Create this item in localStorage if it doesn't exist.
+            localStorage.highScore = 0;
+        }
+        localStorage.highScore = parseInt(localStorage.highScore) - 1;
+    },
+
+    resetHighScore: function() {
+        localStorage.highScore = 0;
+    }
+}
 
 /**
  * EVENT LISTENERS: All game related event listens for keyboard and mouse.
@@ -116,7 +185,7 @@ var update = function(modifier) {
     if (
         hero.x <= (monster.x + 32) && monster.x <= (hero.x + 32) && hero.y <= (monster.y + 32) && monster.y <= (hero.y + 32)
     ) {
-        ++monstersCaught;
+        highScore.incrementHighScore();
         reset();
         console.log("[DEBUG]: Goblin caught");
     }
@@ -158,10 +227,10 @@ var render = function() {
 
     // Score
     ctx.fillStyle = "rgb(250, 250, 250)";
-    ctx.font = "24px Helvetica";
+    ctx.font = "16px Calibri";
     ctx.textAlign = "left";
-    ctx.textBaseline = "top";
-    ctx.fillText("Goblins caught: " + monstersCaught, 32, 32);
+    ctx.textBaseline = "bottom";
+    ctx.fillText("Score: " + highScore.getHighScore(), 40, 40);
 };
 
 // The main game loop
