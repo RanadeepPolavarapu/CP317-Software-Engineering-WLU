@@ -1,10 +1,36 @@
+/**
+ * Documentation and comments are based off Google's JavaScript style guide.
+ */
+// ----------------- DEBUG -- START -- Code below is debugging for developer's reference. ----------------- //
+// DEBUG: Display the window's height and width just for the developer's reference.
+console.log("%c[DEBUG]: Window - height=" + window.innerHeight + ", width=" + window.innerWidth, 'font-weight: bold; color: red;');
+
+// DEBUG: Mouse to window coordinates logging in console. This will allow us to see coordinates for the entire window and the canvas.
+window.addEventListener('mousedown', function(e) {
+    var pos = {
+        x: e.pageX - 0,
+        y: e.pageY - 0
+    };
+    console.log("%c[DEBUG]: " + "x=" + pos.x + ", y=" + pos.y, 'font-weight: bold; color: blue;');
+}, false);
+
+// ----------------- DEBUG -- END -- Code above is debugging for developer's reference. ----------------- //
+
+// ----------------- GAME -- START -- Code below is the core game code. ----------------- //
+
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth / 2;
 canvas.height = window.innerHeight / 2;
-console.log('[DEBUG]: canvas.width=' + canvas.width + ' canvas.height=' + canvas.height);
 document.body.appendChild(canvas);
+
+// DEBUG: Write to console the canvas's width and height for developer's reference.
+console.log('[DEBUG]: canvas.width=' + canvas.width + ' canvas.height=' + canvas.height);
+
+/**
+ * IMAGES: All game related images.
+ */
 
 // Background image
 var bgReady = false;
@@ -30,12 +56,24 @@ monsterImage.onload = function() {
 };
 monsterImage.src = "images/monster.png";
 
+// Bullet image
+var bulletReady = false;
+var bulletImage = new Image();
+bulletImage.onload = function () {
+    bulletReady = true;
+};
+bulletImage.src = "images/fireball.gif";
+
 // Game objects
 var hero = {
     speed: 256 // movement in pixels per second
 };
 var monster = {};
 var monstersCaught = 0;
+
+/**
+ * EVENT LISTENERS: All game related event listens for keyboard and mouse.
+ */
 
 // Handle keyboard controls
 var keysDown = {};
@@ -48,17 +86,7 @@ addEventListener("keyup", function(e) {
     delete keysDown[e.keyCode];
 }, false);
 
-// FUNCTION: A generic function for moving sprites within the boundaries of the canvas
-var genericMoveSprite = function(sprite, speed, modifier){
-    
-};
 
-/**
- * Resets the game canvas.
- * @param {Number} a 
- * @param {Number} b
- * @return {Number} sum
- */
 // Reset the game when the player catches a monster
 var reset = function() {
     hero.x = canvas.width / 2;
@@ -94,10 +122,30 @@ var update = function(modifier) {
     }
 };
 
+/**
+ * RENDER UTILITIES: Utilities for rendering.
+ */
+var renderUtilities = {
+    dynamicCanvasResize: function(canvasObj) {
+        /**
+         * Resizes the canvas based on the user's specifications.
+         */
+        canvasObj.height = window.innerHeight / 2;
+        canvasObj.width = window.innerWidth / 2;
+    }
+}
+
+
 // Draw everything
 var render = function() {
+    /**
+     * Changes the canvas size upon browser's window height and width change. This occurs when you open a browser's Dev Tools or when
+     * the user changes the size of the browser manually.
+     */
+    renderUtilities.dynamicCanvasResize(canvas);
+
     if (bgReady) {
-        ctx.drawImage(bgImage, 0, 0);
+        ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
     }
 
     if (heroReady) {
@@ -139,15 +187,4 @@ var then = Date.now();
 reset();
 main();
 
-
-// DEBUG: Display the window's height and width just for the developer's reference.
-console.log("%c[DEBUG]: Window - height=" + window.innerHeight + ", width=" + window.innerWidth, 'font-weight: bold; color: red;');
-
-// DEBUG: Mouse to window coordinates logging in console. This will allow us to see coordinates for the entire window and the canvas.
-window.addEventListener('mousedown', function(e) {
-    var pos = {
-        x: e.pageX - 0,
-        y: e.pageY - 0
-    };
-    console.log("%c[DEBUG]: " + "x=" + pos.x + ", y=" + pos.y, 'font-weight: bold; color: blue;');
-}, false);
+// ----------------- GAME -- END -- Code above is the core game code. ----------------- //
