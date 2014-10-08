@@ -251,8 +251,8 @@ var render = function() {
     ctx.fillStyle = "rgb(250, 250, 250)";
     ctx.font = "16px Calibri";
     ctx.textAlign = "left";
-    ctx.textBaseline = "bottom";
-    ctx.fillText("Score: " + highScore.getHighScore(), 40, 40);
+    ctx.textBaseline = "top";
+    ctx.fillText("Score: " + highScore.getHighScore(), 36, 36);
 };
 
 // The main game loop
