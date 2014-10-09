@@ -318,7 +318,7 @@ var render = function() {
     ctx.font = "18px Calibri";
     ctx.textAlign = "left";
     ctx.textBaseline = "bottom";
-    ctx.fillText("Score: " + highScore.getHighScore(), 40, 50);
+    ctx.fillText("Score: " + highScore.getHighScore(), 40, 40);
 };
 
 
