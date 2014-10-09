@@ -117,8 +117,8 @@ var hero = {
 var monster = {
     height: 32,
     width: 30,
-    xdir: 1,
-    ydir: 1,
+    xDirection: 1,
+    yDirection: 1,
 };
 
 /**
@@ -261,20 +261,20 @@ var update = function(modifier) {
 
 //function to calculate direction monster is moving as well as increment/decrement its x and y position
 var moveMonster = function(i) {
-    if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30) { //heading right
-        monsters[i].xdir = -1;
-    } else if (monsters[i].xdir == -1 && monsters[i].x <= 0) { //heading left
-        monsters[i].xdir = 1;
+    if (monsters[i].xDirection == 1 && monsters[i].x >= canvas.width - 30) { //heading right
+        monsters[i].xDirection = -1;
+    } else if (monsters[i].xDirection == -1 && monsters[i].x <= 0) { //heading left
+        monsters[i].xDirection = 1;
     }
 
-    if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32) { //heading down
-        monsters[i].ydir = -1;
-    } else if (monsters[i].ydir == -1 && monsters[i].y <= 0) { //heading up
-        monsters[i].ydir = 1;
+    if (monsters[i].yDirection == 1 && monsters[i].y >= canvas.height - 32) { //heading down
+        monsters[i].yDirection = -1;
+    } else if (monsters[i].yDirection == -1 && monsters[i].y <= 0) { //heading up
+        monsters[i].yDirection = 1;
     }
 
-    monsters[i].x += monsters[i].xdir;
-    monsters[i].y += monsters[i].ydir;
+    monsters[i].x += monsters[i].xDirection;
+    monsters[i].y += monsters[i].yDirection;
 };
 
 /**
@@ -328,11 +328,11 @@ var createMonster = function() {
     monster.width = monsterImage.width;
     monster.x = 32 + (Math.random() * (canvas.width - 64));
     monster.y = 32 + (Math.random() * (canvas.height - 64));
-    monster.xdir = 1;
-    monster.ydir = 1;
+    monster.xDirection = 1;
+    monster.yDirection = 1;
     monster.speed = Math.floor((Math.random() * 100) + 1);
     monsters.push(monster);
-    console.log("New monster: {" + monster.x + ", " + monster.y + ", " + monster.xdir + ", " + monster.ydir + "}");
+    console.log("New monster: {" + monster.x + ", " + monster.y + ", " + monster.xDirection + ", " + monster.yDirection + "}");
 }
 
 var checkMonsters = function() {
