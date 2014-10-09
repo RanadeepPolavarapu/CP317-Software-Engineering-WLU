@@ -249,24 +249,19 @@ var update = function(modifier) {
 };
 
 //function to calculate direction monster is moving as well as increment/decrement its x and y position
-var moveMonsters = function() {
-    for (i = 0; i < monsters.length; i++) {
+var moveMonster = function(i){
+	if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30)//heading right
+		monsters[i].xdir = -1;
+	else if (monsters[i].xdir == -1 && monsters[i].x <= 0)//heading left
+		monsters[i].xdir = 1;
+		
+	if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32)//heading down
+		monsters[i].ydir = -1;
+	else if (monsters[i].ydir == -1 && monsters[i].y <= 0)//heading up
+		monsters[i].ydir = 1;
 
-        if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30) { //heading right
-            monsters[i].xdir = -1;
-        } else if (monsters[i].xdir == -1 && monsters[i].x <= 0) { //heading left
-            monsters[i].xdir = 1;
-        }
-
-        if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32) { //heading down
-            monsters[i].ydir = -1;
-        } else if (monsters[i].ydir == -1 && monsters[i].y <= 0) { //heading up
-            monsters[i].ydir = 1;
-        }
-
-        monsters[i].x += monsters[i].xdir;
-        monsters[i].y += monsters[i].ydir;
-    }
+	monsters[i].x += monsters[i].xdir;
+	monsters[i].y += monsters[i].ydir;
 };
 
 /**
