@@ -164,10 +164,10 @@ addEventListener("keyup", function(e) {
 var reset = function() {
     hero.x = canvas.width / 2;
     hero.y = canvas.height / 2;
-
+    createMonster();
     // Throw the monster somewhere on the screen randomly
-    monster.x = 32 + (Math.random() * (canvas.width - 64));
-    monster.y = 32 + (Math.random() * (canvas.height - 64));
+    //monster.x = 32 + (Math.random() * (canvas.width - 64));
+    //monster.y = 32 + (Math.random() * (canvas.height - 64));
 };
 
 // Update game objects
@@ -186,35 +186,36 @@ var update = function(modifier) {
     }
 
     // Are they touching?
-    if (
-        hero.x <= (monster.x + 32) && 
-        monster.x <= (hero.x + 32) && 
-        hero.y <= (monster.y + 32) && 
-        monster.y <= (hero.y + 32)
-    ) {
-        highScore.incrementHighScore();
-        reset();
-        console.log("[DEBUG]: Goblin caught");
+    for (i = 0; i < monsters.length; i ++){
+	if (
+		hero.x <= (monsters[i].x + 32) && monsters[i].x <= (hero.x + 32) && hero.y <= (monsters[i].y + 32) && monsters[i].y <= (hero.y + 32)
+	) {
+		monsters.splice(i,1);
+		highScore.incrementHighScore();
+		//reset();
+		console.log("[DEBUG]: Goblin caught");
+	}
     }
 };
 
-//function to calculate direction monster is moving as well as incremend/decrement its x and y position
-var moveMonster = function(){
-
-	if (xdir == 1 && monster.x >= canvas.width - 30) { //heading right
-		xdir = -1;
-    } else if (xdir == -1 && monster.x <= 0) { //heading left
-		xdir = 1;
-    }
+//function to calculate direction monster is moving as well as increment/decrement its x and y position
+var moveMonsters = function(){
+	for (i = 0; i < monsters.length; i ++){
 		
-	if (ydir == 1 && monster.y >= canvas.height - 32) { //heading down
-		ydir = -1;
-    } else if (ydir == -1 && monster.y <= 0) { //heading up
-		ydir = 1;
-    }
+		if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30)//heading right
+			monsters[i].xdir = -1;
+		else if (monsters[i].xdir == -1 && monsters[i].x <= 0)//heading left
+			monsters[i].xdir = 1;
+			
+		if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32)//heading down
+			monsters[i].ydir = -1;
+		else if (monsters[i].ydir == -1 && monsters[i].y <= 0)//heading up
+			monsters[i].ydir = 1;
 
-	monster.x += xdir;
-	monster.y += ydir;
+		console.log("x: " + monsters[i].xdir + ", y: " + monsters[i].ydir);
+		monsters[i].x += monsters[i].xdir;
+		monsters[i].y += monsters[i].ydir;
+	}
 };
 
 /**
@@ -248,7 +249,8 @@ var render = function() {
     }
 
     if (monsterReady) {
-        ctx.drawImage(monsterImage, monster.x, monster.y);
+        for (i = 0; i < monsters.length; i ++)
+		ctx.drawImage(monsterImage, monsters[i].x, monsters[i].y);
     }
 
     // Score
@@ -258,6 +260,17 @@ var render = function() {
 //    ctx.textBaseline = "top";
     ctx.fillText("Score: " + highScore.getHighScore(), 40, 40);
 };
+
+
+var createMonster = function(){
+	var monster = {};//x, y, xdir, ydir
+	monster.x = 32 + (Math.random() * (canvas.width - 64));
+    	monster.y = 32 + (Math.random() * (canvas.height - 64));
+	monster.xdir = 1;
+	monster.ydir = 1;
+	monsters.push(monster);
+	console.log("New monster: {" + monster.x + ", "  + monster.y + ", "  + monster.xdir + ", "  + monster.ydir + "}");
+}
 
 // The main game loop
 var main = function() {
@@ -282,5 +295,6 @@ var then = Date.now();
 reset();
 main();
 setInterval(moveMonster, 5);
+setInterval(createMonster, 3000);
 
 // ----------------- GAME -- END -- Code above is the core game code. ----------------- //
