@@ -326,7 +326,7 @@ var createMonster = function() {
     monster.y = 32 + (Math.random() * (canvas.height - 64));
     monster.xdir = 1;
     monster.ydir = 1;
-    monster.speed = Math.floor((Math.random() * 500) + 1);
+    monster.speed = Math.floor((Math.random() * 100) + 1);
     monsters.push(monster);
     console.log("New monster: {" + monster.x + ", " + monster.y + ", " + monster.xdir + ", " + monster.ydir + "}");
 }
