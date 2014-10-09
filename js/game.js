@@ -99,7 +99,17 @@ bulletImage.onload = function() {
 };
 bulletImage.src = "images/fireball.gif";
 
-// Game objects
+/**
+ * SOUNDS: All game related audio.
+ */
+var bulletFiringSound = new Audio("sounds/gunshot-silencer.wav");
+var backgroundMusic = new Audio("sounds/background.wav");
+var monsterCaughtSoundEffect = new Audio("audio/stab-sound.mp3");
+
+
+/**
+ * GAME OBJECTS: All meta game related objects.
+ */
 var hero = {
     speed: 256, // movement in pixels per second
     height: heroImage.height,
