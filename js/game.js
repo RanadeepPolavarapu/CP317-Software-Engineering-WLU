@@ -41,6 +41,7 @@ window.addEventListener('mousedown', function(e) {
 // Global Variables
 var CANVAS_HEIGHT = window.innerHeight / 2;
 var CANVAS_WIDTH = window.innerWidth / 2;
+var INNER_BOUNDARY_XY = 32;
 
 // Create the canvas
 var canvas = document.createElement("canvas");
@@ -111,8 +112,8 @@ monsterCaughtSoundEffect.volume = 0.5;
  */
 var hero = {
     speed: 256, // movement in pixels per second
-    height: heroImage.height,
-    width: heroImage.width,
+    height: 32,
+    width: 32,
 };
 var monster = {
     height: 32,
@@ -225,16 +226,16 @@ var arrowKeyRigth = 39;
 
 // Update game objects
 var update = function(modifier) {
-    if (arrowKeyUp in keysDown && hero.y > 2) { // Player is holding mouse up
+    if (arrowKeyUp in keysDown && hero.y > 36) { // Player is holding mouse up
         hero.y -= hero.speed * modifier;
     }
     if (arrowKeyDown in keysDown && hero.y < canvas.height - 34) { // Player is holding mouse down
         hero.y += hero.speed * modifier;
     }
-    if (arrowKeyLeft in keysDown && hero.x > 2) { // Player is holding mouse left
+    if (arrowKeyLeft in keysDown && hero.x > 36) { // Player is holding mouse left
         hero.x -= hero.speed * modifier;
     }
-    if (arrowKeyRigth in keysDown && hero.x < canvas.width - 34) { // Player is holding mouse right
+    if (arrowKeyRigth in keysDown && hero.x < canvas.width - 32) { // Player is holding mouse right
         hero.x += hero.speed * modifier;
     }
     if (((mousePosition.x <= (hero.x + 32)) && (mousePosition.y <= (hero.y + 32))) && isMouseHeld == true) { // Mouse is held on hero
@@ -250,7 +251,7 @@ var update = function(modifier) {
         if (
             hero.x <= (monsters[i].x + 32) && monsters[i].x <= (hero.x + 32) && hero.y <= (monsters[i].y + 32) && monsters[i].y <= (hero.y + 32)
         ) {
-            monsters.splice(i, 1); // Remove the monster to free up resources.
+            monsters.splice(i, 1); // Remove the monster to free up resources and prevent game lag.
             monsterCaughtSoundEffect.play();
             highScore.incrementHighScore();
 //            reset();
@@ -261,13 +262,13 @@ var update = function(modifier) {
 
 //function to calculate direction monster is moving as well as increment/decrement its x and y position
 var moveMonster = function(i) {
-    if (monsters[i].xDirection == 1 && monsters[i].x >= canvas.width - 30) { //heading right
+    if (monsters[i].xDirection == 1 && monsters[i].x >= canvas.width - monster.width) { //heading right
         monsters[i].xDirection = -1;
     } else if (monsters[i].xDirection == -1 && monsters[i].x <= 0) { //heading left
         monsters[i].xDirection = 1;
     }
 
-    if (monsters[i].yDirection == 1 && monsters[i].y >= canvas.height - 32) { //heading down
+    if (monsters[i].yDirection == 1 && monsters[i].y >= canvas.height - monster.height) { //heading down
         monsters[i].yDirection = -1;
     } else if (monsters[i].yDirection == -1 && monsters[i].y <= 0) { //heading up
         monsters[i].yDirection = 1;
@@ -320,7 +321,6 @@ var render = function() {
     ctx.textBaseline = "bottom";
     ctx.fillText("Score: " + highScore.getHighScore(), 40, 40);
 };
-
 
 var createMonster = function() {
     var monster = {}; // sprite Height, sprite Width, position x, position y, Direction X, Direction Y
