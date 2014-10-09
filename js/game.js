@@ -257,7 +257,7 @@ var update = function(modifier) {
             monsterCaughtSoundEffect.play();
             highScore.incrementHighScore();
             //            reset();
-            console.log("[DEBUG]: Goblin caught");
+            console.log("[DEBUG]: Goblin captured. Score increased by +1.");
         }
     }
 };
