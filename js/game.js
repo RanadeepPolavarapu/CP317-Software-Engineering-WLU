@@ -248,15 +248,15 @@ var update = function(modifier) {
     // Are they touching?
     for (i = 0; i < monsters.length; i++) {
         if (
-            hero.x <= (monsters[i].x + monsters[i].height) && 
-            monsters[i].x <= (hero.x + hero.width) && 
-            hero.y <= (monsters[i].y + monsters[i].height) && 
+            hero.x <= (monsters[i].x + monsters[i].height) &&
+            monsters[i].x <= (hero.x + hero.width) &&
+            hero.y <= (monsters[i].y + monsters[i].height) &&
             monsters[i].y <= (hero.y + hero.height)
         ) {
             monsters.splice(i, 1); // Remove the monster to free up resources and prevent game lag.
             monsterCaughtSoundEffect.play();
             highScore.incrementHighScore();
-//            reset();
+            //            reset();
             console.log("[DEBUG]: Goblin caught");
         }
     }
@@ -372,6 +372,6 @@ setInterval(function() {
 }, 1);
 setInterval(checkMonsters, 1); //check if a monster should be moved
 setInterval(createMonster, 3000);
-createMonster();//spawn monster at beginning of game
+createMonster(); //spawn monster at beginning of game
 
 // ----------------- GAME -- END -- Code above is the core game code. ----------------- //
