@@ -176,7 +176,7 @@ var highScore = {
  * EVENT LISTENERS: All game related event listens for keyboard and mouse.
  */
 
-var hold = false; // Determines whether the mouse is held down (true) or not (false)
+var isMouseHeld = false; // Determines whether the mouse is held down (true) or not (false)
 var mousePosition = {
     x: 0,
     y: 0
@@ -199,24 +199,25 @@ addEventListener('mousemove', function(e) {
 }, false);
 
 addEventListener('mousedown', function(e) {
-    hold = true;
+    isMouseHeld = true;
     console.log("mousex = " + mousePosition.x, "mousey = " + mousePosition.y);
     console.log("herox = " + hero.x, "heroy = " + hero.y);
 }, false);
 
 addEventListener('mouseup', function(e) {
-    hold = false;
+    isMouseHeld = false;
 }, false);
 
 // Reset the game when the player catches a monster
 var reset = function() {
     backgroundMusic.play();
 
+    // Spawn hero in the center.
     hero.x = canvas.width;
     hero.y = canvas.height / 4;
 };
 
-
+// Arrow Key Globals
 var arrowKeyUp = 38;
 var arrowKeyDown = 40;
 var arrowKeyLeft = 37;
@@ -224,23 +225,23 @@ var arrowKeyRigth = 39;
 
 // Update game objects
 var update = function(modifier) {
-    if (arrowKeyUp in keysDown && hero.y > 2) { // Player holding up
+    if (arrowKeyUp in keysDown && hero.y > 2) { // Player isMouseHelding up
         hero.y -= hero.speed * modifier;
     }
-    if (arrowKeyDown in keysDown && hero.y < canvas.height - 34) { // Player holding down
+    if (arrowKeyDown in keysDown && hero.y < canvas.height - 34) { // Player isMouseHelding down
         hero.y += hero.speed * modifier;
     }
-    if (arrowKeyLeft in keysDown && hero.x > 2) { // Player holding left
+    if (arrowKeyLeft in keysDown && hero.x > 2) { // Player isMouseHelding left
         hero.x -= hero.speed * modifier;
     }
-    if (arrowKeyRigth in keysDown && hero.x < canvas.width - 34) { // Player holding right
+    if (arrowKeyRigth in keysDown && hero.x < canvas.width - 34) { // Player isMouseHelding right
         hero.x += hero.speed * modifier;
     }
-    if (((mousePosition.x <= (hero.x + 32)) && (mousePosition.y <= (hero.y + 32))) && hold == true) { // Mouse is held on hero
+    if (((mousePosition.x <= (hero.x + 32)) && (mousePosition.y <= (hero.y + 32))) && isMouseHeld == true) { // Mouse is held on hero
         if (((mousePosition.x + 32) <= canvas.width) && ((mousePosition.y + 32) <= canvas.height)) {
             hero.x = mousePosition.x;
             hero.y = mousePosition.y;
-            console.log("Hold: " + hold);
+            console.log("isMouseHeld: " + isMouseHeld);
         }
     };
 
