@@ -2,17 +2,17 @@
  * game.js
  * ===================================================
  * Written for: CP317-A
- * 
+ *
  * Assignment 1
- * 
+ *
  * Group: #4
- * 
+ *
  * Authors:
  *      Ranadeep Polavarapu - (120443120) - (pola3120@mylaurier.ca)
  *      Bruno Salapic - (100574460) - (sala4460@mylaurier.ca)
  *      Lee Glendenning - (120289190) - (glen9190@mylaurier.ca)
  *      Ryan Burke - (120543180) - (burk3180@mylaurier.ca)
- * 
+ *
  * Version: Wednesday, Oct. 8, 2014
  * ========================================================== */
 
@@ -21,6 +21,7 @@
  */
 
 // ----------------- DEBUG -- START -- Code below is debugging for developer's reference. ----------------- //
+
 // DEBUG: Display the window's height and width just for the developer's reference.
 console.log("%c[DEBUG]: Window - height=" + window.innerHeight + ", width=" + window.innerWidth, 'font-weight: bold; color: red;');
 
@@ -87,7 +88,7 @@ monsterImage.src = "images/monster.png";
 // Bullet image
 var bulletReady = false;
 var bulletImage = new Image();
-bulletImage.onload = function () {
+bulletImage.onload = function() {
     bulletReady = true;
 };
 bulletImage.src = "images/fireball.gif";
@@ -114,7 +115,7 @@ var highScore = {
         localStorage.highScore = 0;
         console.log("Scores are now persistent and stored through localStorage!");
     },
-    
+
     destroyHighScore: function() {
         localStorage.removeItem("highScore");
         console.log("Scores are no longer being stored through localStorage!");
@@ -141,7 +142,7 @@ var highScore = {
         }
         localStorage.highScore = parseInt(localStorage.highScore) + 1;
     },
-    
+
     decrementHighScore: function() {
         // Decrement highScore by 1.
         if (!localStorage.highScore) {
@@ -198,35 +199,37 @@ var update = function(modifier) {
     }
 
     // Are they touching?
-    for (i = 0; i < monsters.length; i ++){
-	if (
-		hero.x <= (monsters[i].x + 32) && monsters[i].x <= (hero.x + 32) && hero.y <= (monsters[i].y + 32) && monsters[i].y <= (hero.y + 32)
-	) {
-		monsters.splice(i,1);
-		highScore.incrementHighScore();
-		//reset();
-		console.log("[DEBUG]: Goblin caught");
-	}
+    for (i = 0; i < monsters.length; i++) {
+        if (
+            hero.x <= (monsters[i].x + 32) && monsters[i].x <= (hero.x + 32) && hero.y <= (monsters[i].y + 32) && monsters[i].y <= (hero.y + 32)
+        ) {
+            monsters.splice(i, 1);
+            highScore.incrementHighScore();
+            //reset();
+            console.log("[DEBUG]: Goblin caught");
+        }
     }
 };
 
 //function to calculate direction monster is moving as well as increment/decrement its x and y position
-var moveMonsters = function(){
-	for (i = 0; i < monsters.length; i ++){
-		
-		if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30)//heading right
-			monsters[i].xdir = -1;
-		else if (monsters[i].xdir == -1 && monsters[i].x <= 0)//heading left
-			monsters[i].xdir = 1;
-			
-		if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32)//heading down
-			monsters[i].ydir = -1;
-		else if (monsters[i].ydir == -1 && monsters[i].y <= 0)//heading up
-			monsters[i].ydir = 1;
+var moveMonsters = function() {
+    for (i = 0; i < monsters.length; i++) {
 
-		monsters[i].x += monsters[i].xdir;
-		monsters[i].y += monsters[i].ydir;
-	}
+        if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30) { //heading right
+            monsters[i].xdir = -1;
+        } else if (monsters[i].xdir == -1 && monsters[i].x <= 0) { //heading left
+            monsters[i].xdir = 1;
+        }
+
+        if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32) { //heading down
+            monsters[i].ydir = -1;
+        } else if (monsters[i].ydir == -1 && monsters[i].y <= 0) { //heading up
+            monsters[i].ydir = 1;
+        }
+
+        monsters[i].x += monsters[i].xdir;
+        monsters[i].y += monsters[i].ydir;
+    }
 };
 
 /**
@@ -260,8 +263,8 @@ var render = function() {
     }
 
     if (monsterReady) {
-        for (i = 0; i < monsters.length; i ++)
-		ctx.drawImage(monsterImage, monsters[i].x, monsters[i].y);
+        for (i = 0; i < monsters.length; i++)
+            ctx.drawImage(monsterImage, monsters[i].x, monsters[i].y);
     }
 
     // Score
@@ -273,16 +276,16 @@ var render = function() {
 };
 
 
-var createMonster = function(){
-	var monster = {}; // sprite Height, sprite Width, position x, position y, Direction X, Direction Y
+var createMonster = function() {
+    var monster = {}; // sprite Height, sprite Width, position x, position y, Direction X, Direction Y
     monster.height = monsterImage.height;
     monster.width = monsterImage.width;
-	monster.x = 32 + (Math.random() * (canvas.width - 64));
+    monster.x = 32 + (Math.random() * (canvas.width - 64));
     monster.y = 32 + (Math.random() * (canvas.height - 64));
-	monster.xdir = 1;
-	monster.ydir = 1;
-	monsters.push(monster);
-	console.log("New monster: {" + monster.x + ", "  + monster.y + ", "  + monster.xdir + ", "  + monster.ydir + "}");
+    monster.xdir = 1;
+    monster.ydir = 1;
+    monsters.push(monster);
+    console.log("New monster: {" + monster.x + ", " + monster.y + ", " + monster.xdir + ", " + monster.ydir + "}");
 }
 
 // The main game loop
