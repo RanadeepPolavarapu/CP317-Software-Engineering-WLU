@@ -100,7 +100,7 @@ bulletImage.src = "images/fireball.gif";
  */
 var bulletFiringSound = new Audio("sounds/gunshot-silencer.wav");
 var backgroundMusic = new Audio("sounds/8bit-background-music.mp3");
-var monsterCaughtSoundEffect = new Audio("sounds/stab-sound.wav");
+var monsterCaughtSoundEffect = new Audio("sounds/jab-punch-sound.wav");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.4;
 monsterCaughtSoundEffect.volume = 0.8;
