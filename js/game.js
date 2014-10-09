@@ -295,7 +295,7 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 var then = Date.now();
 reset();
 main();
-setInterval(moveMonster, 5);
+setInterval(moveMonsters, 5);
 setInterval(createMonster, 3000);
 
 // ----------------- GAME -- END -- Code above is the core game code. ----------------- //
