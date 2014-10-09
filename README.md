@@ -3,7 +3,7 @@ CP317-Assignment-1
 
 WLU CP 317 Assignment #1 - JavaScript Goblin Game
 
-###By: Ranadeep Polavarapu, Bruno Salapic, Lee Glendenning, Ryan Burke
+#####By: Ranadeep Polavarapu, Bruno Salapic, Lee Glendenning, Ryan Burke
 
 Checklist
 =========
