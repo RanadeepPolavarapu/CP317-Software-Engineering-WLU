@@ -230,10 +230,12 @@ var update = function(modifier) {
         hero.x += hero.speed * modifier;
     }
     if (((mousepos.x <= (hero.x + 32)) && (mousepos.y <= (hero.y + 32))) && hold == true) { // Mouse is held on hero
+    	if (((mousepos.x + 32) <= canvas.width) && ((mousepos.y + 32) <= canvas.height)) {
 		hero.x = mousepos.x;
 		hero.y = mousepos.y;
 		console.log("Hold: " + hold);
-	};
+    	}
+    };
 
     // Are they touching?
     for (i = 0; i < monsters.length; i++) {
