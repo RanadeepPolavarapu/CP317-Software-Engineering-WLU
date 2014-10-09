@@ -263,8 +263,9 @@ var render = function() {
     }
 
     if (monsterReady) {
-        for (i = 0; i < monsters.length; i++)
+        for (i = 0; i < monsters.length; i++) {
             ctx.drawImage(monsterImage, monsters[i].x, monsters[i].y);
+        }
     }
 
     // Score
