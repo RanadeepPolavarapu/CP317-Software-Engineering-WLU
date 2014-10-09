@@ -99,8 +99,11 @@ bulletImage.src = "images/fireball.gif";
  * SOUNDS: All game related audio.
  */
 var bulletFiringSound = new Audio("sounds/gunshot-silencer.wav");
-var backgroundMusic = new Audio("sounds/background.wav");
-var monsterCaughtSoundEffect = new Audio("audio/stab-sound.mp3");
+var backgroundMusic = new Audio("sounds/8bit-background-music.mp3");
+var monsterCaughtSoundEffect = new Audio("sounds/stab-sound.wav");
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.4;
+monsterCaughtSoundEffect.volume = 0.8;
 
 
 /**
@@ -207,8 +210,11 @@ addEventListener('mouseup', function(e) {
 
 // Reset the game when the player catches a monster
 var reset = function() {
+    backgroundMusic.play();
+    
     hero.x = canvas.width / 2;
     hero.y = canvas.height / 2;
+    
     createMonster();
     // Throw the monster somewhere on the screen randomly
     //monster.x = 32 + (Math.random() * (canvas.width - 64));
@@ -243,6 +249,7 @@ var update = function(modifier) {
             hero.x <= (monsters[i].x + 32) && monsters[i].x <= (hero.x + 32) && hero.y <= (monsters[i].y + 32) && monsters[i].y <= (hero.y + 32)
         ) {
             monsters.splice(i, 1);
+            monsterCaughtSoundEffect.play();
             highScore.incrementHighScore();
             //reset();
             console.log("[DEBUG]: Goblin caught");
