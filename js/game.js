@@ -308,10 +308,10 @@ var render = function() {
 
     // Score
     ctx.fillStyle = "rgb(250, 250, 250)";
-    ctx.font = "16px Calibri";
+    ctx.font = "18px Calibri";
     ctx.textAlign = "left";
     ctx.textBaseline = "bottom";
-    ctx.fillText("Score: " + highScore.getHighScore(), 36, 36);
+    ctx.fillText("Score: " + highScore.getHighScore(), 40, 50);
 };
 
 
