@@ -93,7 +93,7 @@ bulletImage.src = "images/fireball.gif";
 /**
  * SOUNDS: All game related audio.
  */
-var bulletFiringSound = new Audio("sounds/gunshot-silencer.wav");
+var bulletSound = new Audio("sounds/gunshot-silencer.wav");
 var backgroundMusic = new Audio("sounds/8bit-background-music.mp3");
 var monsterCaughtSoundEffect = new Audio("sounds/jab-punch-sound.wav");
 // Sound properties modified.
