@@ -238,8 +238,8 @@ var update = function(modifier) {
     if (arrowKeyRigth in keysDown && hero.x < canvas.width - hero.width) { // Player is holding mouse right
         hero.x += hero.speed * modifier;
     }
-    if (((mousePosition.x <= (hero.x + 32)) && (mousePosition.y <= (hero.y + 32))) && isMouseHeld == true) { // Mouse is held on hero
-        if (((mousePosition.x + 32) <= canvas.width) && ((mousePosition.y + 32) <= canvas.height)) {
+    if (((mousePosition.x <= (hero.x + hero.width)) && (mousePosition.y <= (hero.y + hero.height))) && isMouseHeld == true) { // Mouse is held on hero
+        if (((mousePosition.x + hero.width) <= canvas.width) && ((mousePosition.y + hero.height) <= canvas.height)) {
             hero.x = mousePosition.x;
             hero.y = mousePosition.y;
             console.log("isMouseHeld: " + isMouseHeld);
