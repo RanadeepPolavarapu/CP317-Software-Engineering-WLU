@@ -9,7 +9,6 @@
  * 
  * Authors:
  *      Ranadeep Polavarapu - (120443120) - (pola3120@mylaurier.ca)
- *      Bruno Salapic - () - ()
  *      Bruno Salapic - (100574460) - (sala4460@mylaurier.ca)
  *      Lee Glendenning - (120289190) - (glen9190@mylaurier.ca)
  *      Ryan Burke - (120543180) - (burk3180@mylaurier.ca)
@@ -45,8 +44,8 @@ var CANVAS_WIDTH = window.innerWidth / 2;
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth / 2;
-canvas.height = window.innerHeight / 2;
+canvas.width = CANVAS_HEIGHT;
+canvas.height = CANVAS_WIDTH;
 document.body.appendChild(canvas);
 
 // DEBUG: Write to console the canvas's width and height for developer's reference.
@@ -95,9 +94,16 @@ bulletImage.src = "images/fireball.gif";
 
 // Game objects
 var hero = {
-    speed: 256 // movement in pixels per second
+    speed: 256, // movement in pixels per second
+    height: heroImage.height,
+    width: heroImage.width,
 };
-//var monster = {};
+var monster = {
+    height: monsterImage.height,
+    width: monsterImage.width,
+    xdir: 1,
+    ydir: 1,
+};
 
 /**
  * HIGH SCORE UTILITIES: Score stored using localStorage.
@@ -218,7 +224,6 @@ var moveMonsters = function(){
 		else if (monsters[i].ydir == -1 && monsters[i].y <= 0)//heading up
 			monsters[i].ydir = 1;
 
-		console.log("x: " + monsters[i].xdir + ", y: " + monsters[i].ydir);
 		monsters[i].x += monsters[i].xdir;
 		monsters[i].y += monsters[i].ydir;
 	}
@@ -263,8 +268,8 @@ var render = function() {
     ctx.fillStyle = "rgb(250, 250, 250)";
     ctx.font = "16px Calibri";
     ctx.textAlign = "left";
-//    ctx.textBaseline = "top";
-    ctx.fillText("Score: " + highScore.getHighScore(), 40, 40);
+    ctx.textBaseline = "bottom";
+    ctx.fillText("Score: " + highScore.getHighScore(), 36, 36);
 };
 
 
