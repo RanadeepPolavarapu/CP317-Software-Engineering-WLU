@@ -177,7 +177,7 @@ var highScore = {
  */
 
 var hold = false; // Determines whether the mouse is held down (true) or not (false)
-var mousepos = {
+var mousePosition = {
     x: 0,
     y: 0
 };
@@ -194,13 +194,13 @@ addEventListener("keyup", function(e) {
 }, false);
 
 addEventListener('mousemove', function(e) {
-    mousepos.x = e.x - canvas.offsetLeft;
-    mousepos.y = e.y - canvas.offsetTop;
+    mousePosition.x = e.x - canvas.offsetLeft;
+    mousePosition.y = e.y - canvas.offsetTop;
 }, false);
 
 addEventListener('mousedown', function(e) {
     hold = true;
-    console.log("mousex = " + mousepos.x, "mousey = " + mousepos.y);
+    console.log("mousex = " + mousePosition.x, "mousey = " + mousePosition.y);
     console.log("herox = " + hero.x, "heroy = " + hero.y);
 }, false);
 
@@ -230,10 +230,10 @@ var update = function(modifier) {
     if (39 in keysDown && hero.x < canvas.width - 34) { // Player holding right
         hero.x += hero.speed * modifier;
     }
-    if (((mousepos.x <= (hero.x + 32)) && (mousepos.y <= (hero.y + 32))) && hold == true) { // Mouse is held on hero
-        if (((mousepos.x + 32) <= canvas.width) && ((mousepos.y + 32) <= canvas.height)) {
-            hero.x = mousepos.x;
-            hero.y = mousepos.y;
+    if (((mousePosition.x <= (hero.x + 32)) && (mousePosition.y <= (hero.y + 32))) && hold == true) { // Mouse is held on hero
+        if (((mousePosition.x + 32) <= canvas.width) && ((mousePosition.y + 32) <= canvas.height)) {
+            hero.x = mousePosition.x;
+            hero.y = mousePosition.y;
             console.log("Hold: " + hold);
         }
     };
@@ -246,7 +246,7 @@ var update = function(modifier) {
             monsters.splice(i, 1); // Remove the monster to free up resources.
             monsterCaughtSoundEffect.play();
             highScore.incrementHighScore();
-            reset();
+//            reset();
             console.log("[DEBUG]: Goblin caught");
         }
     }
