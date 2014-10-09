@@ -102,8 +102,8 @@ var backgroundMusic = new Audio("sounds/8bit-background-music.mp3");
 var monsterCaughtSoundEffect = new Audio("sounds/jab-punch-sound.wav");
 // Sound properties modified.
 backgroundMusic.loop = true;
-backgroundMusic.volume = 0.4;
-monsterCaughtSoundEffect.volume = 0.8;
+backgroundMusic.volume = 0.6;
+monsterCaughtSoundEffect.volume = 0.5;
 
 
 /**
@@ -115,8 +115,8 @@ var hero = {
     width: heroImage.width,
 };
 var monster = {
-    height: monsterImage.height,
-    width: monsterImage.width,
+    height: 32,
+    width: 30,
     xdir: 1,
     ydir: 1,
 };
@@ -216,18 +216,24 @@ var reset = function() {
     hero.y = canvas.height / 4;
 };
 
+
+var arrowKeyUp = 38;
+var arrowKeyDown = 40;
+var arrowKeyLeft = 37;
+var arrowKeyRigth = 39;
+
 // Update game objects
 var update = function(modifier) {
-    if (38 in keysDown && hero.y > 2) { // Player holding up
+    if (arrowKeyUp in keysDown && hero.y > 2) { // Player holding up
         hero.y -= hero.speed * modifier;
     }
-    if (40 in keysDown && hero.y < canvas.height - 34) { // Player holding down
+    if (arrowKeyDown in keysDown && hero.y < canvas.height - 34) { // Player holding down
         hero.y += hero.speed * modifier;
     }
-    if (37 in keysDown && hero.x > 2) { // Player holding left
+    if (arrowKeyLeft in keysDown && hero.x > 2) { // Player holding left
         hero.x -= hero.speed * modifier;
     }
-    if (39 in keysDown && hero.x < canvas.width - 34) { // Player holding right
+    if (arrowKeyRigth in keysDown && hero.x < canvas.width - 34) { // Player holding right
         hero.x += hero.speed * modifier;
     }
     if (((mousePosition.x <= (hero.x + 32)) && (mousePosition.y <= (hero.y + 32))) && hold == true) { // Mouse is held on hero
