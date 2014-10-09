@@ -76,10 +76,6 @@ heroImage.onload = function() {
 heroImage.src = "images/hero.png";
 
 // Monster image
-var monsters = [];
-var monsterHeight = 32;
-var monsterWidth = 32;
-
 var monsterReady = false;
 var monsterImage = new Image();
 monsterImage.onload = function() {
@@ -108,19 +104,22 @@ monsterCaughtSoundEffect.volume = 0.5;
 
 
 /**
- * GAME OBJECTS: All meta game related objects.
+ * GAME OBJECTS: All meta game related models.
  */
 var hero = {
     speed: 256, // movement in pixels per second
     height: 32,
     width: 32,
 };
+
 var monster = {
     height: 32,
     width: 30,
     xDirection: 1,
     yDirection: 1,
 };
+
+var monsters = [];
 
 /**
  * HIGH SCORE UTILITIES: Score stored using localStorage.
