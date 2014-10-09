@@ -10,7 +10,7 @@ Checklist
 Requirements
 ------
 *  [✔] Prevent the sprites from going out of the screen.  
-*  [✖] The player can move the hero by clicking and dragging using the mouse  
+*  [✔] The player can move the hero by clicking and dragging using the mouse  
 *  [✔] The canvas' width and height should be half of those of the browser's window.  
 *  [✔] The background image should cover the whole canvas.  
 *  [✔] Every 3 seconds, a new goblin appears in a random position and moves at a random speed;  
@@ -20,7 +20,7 @@ move in any random direction, such as up, down, left, right, and, say, 45% diago
 goblin should disappear.  
 *  [✔] Use localStorage to store the number of goblins caught. This number should persist and be
 displayed across launches of the game.  
-*  [✖] Add background sound. When the hero catches a goblin, a distinct sound should be played.  
+*  [✔] Add background sound. When the hero catches a goblin, a distinct sound should be played.  
 
 Bonus
 ------
