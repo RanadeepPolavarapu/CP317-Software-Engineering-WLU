@@ -52,7 +52,7 @@ document.body.appendChild(canvas);
 // DEBUG: Write to console the canvas's width and height for developer's reference.
 console.log('[DEBUG]: canvas.width=' + canvas.width + ' canvas.height=' + canvas.height);
 
-var time = 0;//gobal timer
+var time = 0; //gobal timer
 
 /**
  * IMAGES: All game related images.
@@ -194,27 +194,27 @@ addEventListener("keyup", function(e) {
 }, false);
 
 addEventListener('mousemove', function(e) {
-	mousepos.x = e.x - canvas.offsetLeft;
-	mousepos.y = e.y - canvas.offsetTop;
+    mousepos.x = e.x - canvas.offsetLeft;
+    mousepos.y = e.y - canvas.offsetTop;
 }, false);
 
 addEventListener('mousedown', function(e) {
-	hold = true;
-	console.log("mousex = " + mousepos.x,"mousey = " + mousepos.y);
-	console.log("herox = " + hero.x,"heroy = " + hero.y);
+    hold = true;
+    console.log("mousex = " + mousepos.x, "mousey = " + mousepos.y);
+    console.log("herox = " + hero.x, "heroy = " + hero.y);
 }, false);
 
 addEventListener('mouseup', function(e) {
-	hold = false;
+    hold = false;
 }, false);
 
 // Reset the game when the player catches a monster
 var reset = function() {
     backgroundMusic.play();
-    
+
     hero.x = canvas.width / 2;
     hero.y = canvas.height / 2;
-    
+
     createMonster();
     // Throw the monster somewhere on the screen randomly
     //monster.x = 32 + (Math.random() * (canvas.width - 64));
@@ -236,11 +236,11 @@ var update = function(modifier) {
         hero.x += hero.speed * modifier;
     }
     if (((mousepos.x <= (hero.x + 32)) && (mousepos.y <= (hero.y + 32))) && hold == true) { // Mouse is held on hero
-    	if (((mousepos.x + 32) <= canvas.width) && ((mousepos.y + 32) <= canvas.height)) {
-		hero.x = mousepos.x;
-		hero.y = mousepos.y;
-		console.log("Hold: " + hold);
-    	}
+        if (((mousepos.x + 32) <= canvas.width) && ((mousepos.y + 32) <= canvas.height)) {
+            hero.x = mousepos.x;
+            hero.y = mousepos.y;
+            console.log("Hold: " + hold);
+        }
     };
 
     // Are they touching?
@@ -258,19 +258,19 @@ var update = function(modifier) {
 };
 
 //function to calculate direction monster is moving as well as increment/decrement its x and y position
-var moveMonster = function(i){
-	if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30)//heading right
-		monsters[i].xdir = -1;
-	else if (monsters[i].xdir == -1 && monsters[i].x <= 0)//heading left
-		monsters[i].xdir = 1;
-		
-	if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32)//heading down
-		monsters[i].ydir = -1;
-	else if (monsters[i].ydir == -1 && monsters[i].y <= 0)//heading up
-		monsters[i].ydir = 1;
+var moveMonster = function(i) {
+    if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30) //heading right
+        monsters[i].xdir = -1;
+    else if (monsters[i].xdir == -1 && monsters[i].x <= 0) //heading left
+        monsters[i].xdir = 1;
 
-	monsters[i].x += monsters[i].xdir;
-	monsters[i].y += monsters[i].ydir;
+    if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32) //heading down
+        monsters[i].ydir = -1;
+    else if (monsters[i].ydir == -1 && monsters[i].y <= 0) //heading up
+        monsters[i].ydir = 1;
+
+    monsters[i].x += monsters[i].xdir;
+    monsters[i].y += monsters[i].ydir;
 };
 
 /**
@@ -331,12 +331,12 @@ var createMonster = function() {
     console.log("New monster: {" + monster.x + ", " + monster.y + ", " + monster.xdir + ", " + monster.ydir + "}");
 }
 
-var checkMonsters = function(){
-	for (i = 0; i < monsters.length; i ++){
-		if ((time % monsters[i].speed) % 2 == 0){
-			moveMonster(i);
-		}
-	}
+var checkMonsters = function() {
+    for (i = 0; i < monsters.length; i++) {
+        if ((time % monsters[i].speed) % 2 == 0) {
+            moveMonster(i);
+        }
+    }
 }
 
 // The main game loop
@@ -361,8 +361,10 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 var then = Date.now();
 reset();
 main();
-setInterval(function() {time ++;}, 1);
-setInterval(checkMonsters, 1);//check if a monster should be moved
+setInterval(function() {
+    time++;
+}, 1);
+setInterval(checkMonsters, 1); //check if a monster should be moved
 setInterval(createMonster, 3000);
 
 // ----------------- GAME -- END -- Code above is the core game code. ----------------- //
