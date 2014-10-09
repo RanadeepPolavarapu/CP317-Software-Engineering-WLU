@@ -52,6 +52,8 @@ document.body.appendChild(canvas);
 // DEBUG: Write to console the canvas's width and height for developer's reference.
 console.log('[DEBUG]: canvas.width=' + canvas.width + ' canvas.height=' + canvas.height);
 
+var time = 0;//gobal timer
+
 /**
  * IMAGES: All game related images.
  */
@@ -320,8 +322,17 @@ var createMonster = function() {
     monster.y = 32 + (Math.random() * (canvas.height - 64));
     monster.xdir = 1;
     monster.ydir = 1;
+    monster.speed = Math.floor((Math.random() * 500) + 1);
     monsters.push(monster);
     console.log("New monster: {" + monster.x + ", " + monster.y + ", " + monster.xdir + ", " + monster.ydir + "}");
+}
+
+var checkMonsters = function(){
+	for (i = 0; i < monsters.length; i ++){
+		if ((time % monsters[i].speed) % 2 == 0){
+			moveMonster(i);
+		}
+	}
 }
 
 // The main game loop
@@ -346,7 +357,8 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 var then = Date.now();
 reset();
 main();
-setInterval(moveMonsters, 5);
+setInterval(function() {time ++;}, 1);
+setInterval(checkMonsters, 1);//check if a monster should be moved
 setInterval(createMonster, 3000);
 
 // ----------------- GAME -- END -- Code above is the core game code. ----------------- //
