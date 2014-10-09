@@ -68,10 +68,11 @@ heroImage.onload = function() {
 heroImage.src = "images/hero.png";
 
 // Monster image
+var monsters = [];
 var monsterHeight = 32;
 var monsterWidth = 32;
-var xdir = 1;
-var ydir = 1;
+//var xdir = 1;
+//var ydir = 1;
 var monsterReady = false;
 var monsterImage = new Image();
 monsterImage.onload = function() {
@@ -91,7 +92,7 @@ bulletImage.src = "images/fireball.gif";
 var hero = {
     speed: 256 // movement in pixels per second
 };
-var monster = {};
+//var monster = {};
 
 /**
  * HIGH SCORE UTILITIES: Score stored using localStorage.
