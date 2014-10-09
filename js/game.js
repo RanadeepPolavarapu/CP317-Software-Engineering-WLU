@@ -25,15 +25,6 @@
 // DEBUG: Display the window's height and width just for the developer's reference.
 console.log("%c[DEBUG]: Window - height=" + window.innerHeight + ", width=" + window.innerWidth, 'font-weight: bold; color: red;');
 
-// DEBUG: Mouse to window coordinates logging in console. This will allow us to see coordinates for the entire window and the canvas.
-window.addEventListener('mousedown', function(e) {
-    var pos = {
-        x: e.pageX - 0,
-        y: e.pageY - 0
-    };
-    console.log("%c[DEBUG]: " + "x=" + pos.x + ", y=" + pos.y, 'font-weight: bold; color: blue;');
-}, false);
-
 // ----------------- DEBUG -- END -- Code above is debugging for developer's reference. ----------------- //
 
 // ----------------- GAME -- START -- Code below is the core game code. ----------------- //
@@ -201,8 +192,8 @@ addEventListener('mousemove', function(e) {
 
 addEventListener('mousedown', function(e) {
     isMouseHeld = true;
-    console.log("mousex = " + mousePosition.x, "mousey = " + mousePosition.y);
-    console.log("herox = " + hero.x, "heroy = " + hero.y);
+    console.log("%c[DEBUG]: " + "x=" + mousePosition.x + ", y=" + mousePosition.y, 'font-weight: bold; color: blue;');
+    console.log("[DEBUG]: heroX = " + hero.x, "heroY = " + hero.y);
 }, false);
 
 addEventListener('mouseup', function(e) {
@@ -214,8 +205,8 @@ addEventListener('mouseup', function(e) {
  * GAME UTILITIES: All game related calculations such as colissions and etc.
  */
 var gameUtilities = {
-    checkForColission: function(a, b) {
-        // Checks for colission by checking if two objects sprites' boxes are overlapping.
+    checkForCollision: function(a, b) {
+        // Checks for collision  by checking if two objects sprites' boxes are overlapping.
         return a.x < b.x + b.width &&
             a.x + a.width > b.x &&
             a.y < b.y + b.height &&
@@ -256,18 +247,12 @@ var update = function(modifier) {
         if (((mousePosition.x + hero.width) <= canvas.width) && ((mousePosition.y + hero.height) <= canvas.height)) {
             hero.x = mousePosition.x;
             hero.y = mousePosition.y;
-            console.log("isMouseHeld: " + isMouseHeld);
         }
     };
 
     // Are they touching?
     for (i = 0; i < monsters.length; i++) {
-        if (
-            hero.x <= (monsters[i].x + monsters[i].height) &&
-            monsters[i].x <= (hero.x + hero.width) &&
-            hero.y <= (monsters[i].y + monsters[i].height) &&
-            monsters[i].y <= (hero.y + hero.height)
-        ) {
+        if (gameUtilities.checkForCollision(hero, monsters[i])) {
             monsters.splice(i, 1); // Remove the monster to free up resources and prevent game lag.
             monsterCaughtSoundEffect.play();
             highScore.incrementHighScore();
@@ -349,7 +334,7 @@ var createMonster = function() {
     monster.yDirection = 1;
     monster.speed = Math.floor((Math.random() * 100) + 1);
     monsters.push(monster);
-    console.log("New monster: {" + monster.x + ", " + monster.y + ", " + monster.xDirection + ", " + monster.yDirection + "}");
+    console.log("[DEBUG]: New monster: {" + monster.x + ", " + monster.y + ", " + monster.xDirection + ", " + monster.yDirection + "}");
 }
 
 var checkMonsters = function() {
