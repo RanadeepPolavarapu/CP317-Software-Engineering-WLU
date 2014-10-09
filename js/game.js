@@ -100,6 +100,7 @@ bulletImage.src = "images/fireball.gif";
 var bulletFiringSound = new Audio("sounds/gunshot-silencer.wav");
 var backgroundMusic = new Audio("sounds/8bit-background-music.mp3");
 var monsterCaughtSoundEffect = new Audio("sounds/jab-punch-sound.wav");
+// Sound properties modified.
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.4;
 monsterCaughtSoundEffect.volume = 0.8;
@@ -242,10 +243,10 @@ var update = function(modifier) {
         if (
             hero.x <= (monsters[i].x + 32) && monsters[i].x <= (hero.x + 32) && hero.y <= (monsters[i].y + 32) && monsters[i].y <= (hero.y + 32)
         ) {
-            monsters.splice(i, 1);
+            monsters.splice(i, 1); // Remove the monster to free up resources.
             monsterCaughtSoundEffect.play();
             highScore.incrementHighScore();
-            //reset();
+            reset();
             console.log("[DEBUG]: Goblin caught");
         }
     }
