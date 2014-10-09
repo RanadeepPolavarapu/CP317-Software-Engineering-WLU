@@ -94,7 +94,8 @@ monsterCaughtSoundEffect.volume = 0.5;
 
 
 /**
- * GAME OBJECTS: All meta game related models.
+ * GAME OBJECTS: All meta game related models. Object attributes used as global variables. Can change value here and have it change in the
+ * entire file rather than changing every single value of 32 (hero height and width).
  */
 var hero = {
     speed: 256, // movement in pixels per second
