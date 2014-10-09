@@ -25,12 +25,6 @@
 // DEBUG: Display the window's height and width just for the developer's reference.
 console.log("%c[DEBUG]: Window - height=" + window.innerHeight + ", width=" + window.innerWidth, 'font-weight: bold; color: red;');
 
-var hold = false; // Determines whether the mouse is held down (true) or not (false)
-var mousepos = {
-	x:0,
-	y:0
-	};
-	
 // DEBUG: Mouse to window coordinates logging in console. This will allow us to see coordinates for the entire window and the canvas.
 window.addEventListener('mousedown', function(e) {
     var pos = {
@@ -176,6 +170,12 @@ var highScore = {
 /**
  * EVENT LISTENERS: All game related event listens for keyboard and mouse.
  */
+
+var hold = false; // Determines whether the mouse is held down (true) or not (false)
+var mousepos = {
+    x: 0,
+    y: 0
+};
 
 // Handle keyboard controls
 var keysDown = {};
