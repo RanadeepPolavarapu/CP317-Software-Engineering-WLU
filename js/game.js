@@ -249,7 +249,10 @@ var update = function(modifier) {
     // Are they touching?
     for (i = 0; i < monsters.length; i++) {
         if (
-            hero.x <= (monsters[i].x + 32) && monsters[i].x <= (hero.x + 32) && hero.y <= (monsters[i].y + 32) && monsters[i].y <= (hero.y + 32)
+            hero.x <= (monsters[i].x + monsters[i].height) && 
+            monsters[i].x <= (hero.x + hero.width) && 
+            hero.y <= (monsters[i].y + monsters[i].height) && 
+            monsters[i].y <= (hero.y + hero.height)
         ) {
             monsters.splice(i, 1); // Remove the monster to free up resources and prevent game lag.
             monsterCaughtSoundEffect.play();
