@@ -247,6 +247,7 @@ var update = function(modifier) {
         if (((mousePosition.x + hero.width) <= canvas.width) && ((mousePosition.y + hero.height) <= canvas.height)) {
             hero.x = mousePosition.x;
             hero.y = mousePosition.y;
+            console.log("isMouseHeld: " + isMouseHeld);
         }
     };
 
