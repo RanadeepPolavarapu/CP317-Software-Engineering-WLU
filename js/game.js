@@ -225,16 +225,16 @@ var arrowKeyRigth = 39;
 
 // Update game objects
 var update = function(modifier) {
-    if (arrowKeyUp in keysDown && hero.y > 2) { // Player isMouseHelding up
+    if (arrowKeyUp in keysDown && hero.y > 2) { // Player is holding mouse up
         hero.y -= hero.speed * modifier;
     }
-    if (arrowKeyDown in keysDown && hero.y < canvas.height - 34) { // Player isMouseHelding down
+    if (arrowKeyDown in keysDown && hero.y < canvas.height - 34) { // Player is holding mouse down
         hero.y += hero.speed * modifier;
     }
-    if (arrowKeyLeft in keysDown && hero.x > 2) { // Player isMouseHelding left
+    if (arrowKeyLeft in keysDown && hero.x > 2) { // Player is holding mouse left
         hero.x -= hero.speed * modifier;
     }
-    if (arrowKeyRigth in keysDown && hero.x < canvas.width - 34) { // Player isMouseHelding right
+    if (arrowKeyRigth in keysDown && hero.x < canvas.width - 34) { // Player is holding mouse right
         hero.x += hero.speed * modifier;
     }
     if (((mousePosition.x <= (hero.x + 32)) && (mousePosition.y <= (hero.y + 32))) && isMouseHeld == true) { // Mouse is held on hero
