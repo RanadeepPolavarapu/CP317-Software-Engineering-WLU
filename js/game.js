@@ -25,6 +25,12 @@
 // DEBUG: Display the window's height and width just for the developer's reference.
 console.log("%c[DEBUG]: Window - height=" + window.innerHeight + ", width=" + window.innerWidth, 'font-weight: bold; color: red;');
 
+var hold = false; // Determines whether the mouse is held down (true) or not (false)
+var mousepos = {
+	x:0,
+	y:0
+	};
+	
 // DEBUG: Mouse to window coordinates logging in console. This will allow us to see coordinates for the entire window and the canvas.
 window.addEventListener('mousedown', function(e) {
     var pos = {
@@ -172,6 +178,20 @@ addEventListener("keyup", function(e) {
     delete keysDown[e.keyCode];
 }, false);
 
+addEventListener('mousemove', function(e) {
+	mousepos.x = e.x - canvas.offsetLeft;
+	mousepos.y = e.y - canvas.offsetTop;
+}, false);
+
+addEventListener('mousedown', function(e) {
+	hold = true;
+	console.log("mousex = " + mousepos.x,"mousey = " + mousepos.y);
+	console.log("herox = " + hero.x,"heroy = " + hero.y);
+}, false);
+
+addEventListener('mouseup', function(e) {
+	hold = false;
+}, false);
 
 // Reset the game when the player catches a monster
 var reset = function() {
@@ -197,6 +217,11 @@ var update = function(modifier) {
     if (39 in keysDown && hero.x < canvas.width - 34) { // Player holding right
         hero.x += hero.speed * modifier;
     }
+    if (((mousepos.x <= (hero.x + 32)) && (mousepos.y <= (hero.y + 32))) && hold == true) { // Mouse is held on hero
+		hero.x = mousepos.x;
+		hero.y = mousepos.y;
+		console.log("Hold: " + hold);
+	};
 
     // Are they touching?
     for (i = 0; i < monsters.length; i++) {
