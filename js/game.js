@@ -52,7 +52,7 @@ document.body.appendChild(canvas);
 // DEBUG: Write to console the canvas's width and height for developer's reference.
 console.log('[DEBUG]: canvas.width=' + canvas.width + ' canvas.height=' + canvas.height);
 
-var time = 0; //gobal timer
+var time = 0; // global timer
 
 /**
  * IMAGES: All game related images.
@@ -78,8 +78,7 @@ heroImage.src = "images/hero.png";
 var monsters = [];
 var monsterHeight = 32;
 var monsterWidth = 32;
-//var xdir = 1;
-//var ydir = 1;
+
 var monsterReady = false;
 var monsterImage = new Image();
 monsterImage.onload = function() {
@@ -214,11 +213,6 @@ var reset = function() {
 
     hero.x = canvas.width / 2;
     hero.y = canvas.height / 2;
-
-    createMonster();
-    // Throw the monster somewhere on the screen randomly
-    //monster.x = 32 + (Math.random() * (canvas.width - 64));
-    //monster.y = 32 + (Math.random() * (canvas.height - 64));
 };
 
 // Update game objects
@@ -259,15 +253,17 @@ var update = function(modifier) {
 
 //function to calculate direction monster is moving as well as increment/decrement its x and y position
 var moveMonster = function(i) {
-    if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30) //heading right
+    if (monsters[i].xdir == 1 && monsters[i].x >= canvas.width - 30) { //heading right
         monsters[i].xdir = -1;
-    else if (monsters[i].xdir == -1 && monsters[i].x <= 0) //heading left
+    } else if (monsters[i].xdir == -1 && monsters[i].x <= 0) { //heading left
         monsters[i].xdir = 1;
+    }
 
-    if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32) //heading down
+    if (monsters[i].ydir == 1 && monsters[i].y >= canvas.height - 32) { //heading down
         monsters[i].ydir = -1;
-    else if (monsters[i].ydir == -1 && monsters[i].y <= 0) //heading up
+    } else if (monsters[i].ydir == -1 && monsters[i].y <= 0) { //heading up
         monsters[i].ydir = 1;
+    }
 
     monsters[i].x += monsters[i].xdir;
     monsters[i].y += monsters[i].ydir;
