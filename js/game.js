@@ -274,9 +274,11 @@ var render = function() {
 
 
 var createMonster = function(){
-	var monster = {};//x, y, xdir, ydir
+	var monster = {}; // sprite Height, sprite Width, position x, position y, Direction X, Direction Y
+    monster.height = monsterImage.height;
+    monster.width = monsterImage.width;
 	monster.x = 32 + (Math.random() * (canvas.width - 64));
-    	monster.y = 32 + (Math.random() * (canvas.height - 64));
+    monster.y = 32 + (Math.random() * (canvas.height - 64));
 	monster.xdir = 1;
 	monster.ydir = 1;
 	monsters.push(monster);
