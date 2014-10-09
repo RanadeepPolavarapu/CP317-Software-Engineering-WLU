@@ -41,7 +41,6 @@ window.addEventListener('mousedown', function(e) {
 // Global Variables
 var CANVAS_HEIGHT = window.innerHeight / 2;
 var CANVAS_WIDTH = window.innerWidth / 2;
-var INNER_BOUNDARY_XY = 32;
 
 // Create the canvas
 var canvas = document.createElement("canvas");
@@ -109,14 +108,14 @@ monsterCaughtSoundEffect.volume = 0.5;
 var hero = {
     speed: 256, // movement in pixels per second
     height: 32,
-    width: 32,
+    width: 32
 };
 
 var monster = {
     height: 32,
     width: 30,
     xDirection: 1,
-    yDirection: 1,
+    yDirection: 1
 };
 
 var monsters = [];
