@@ -212,8 +212,8 @@ addEventListener('mouseup', function(e) {
 var reset = function() {
     backgroundMusic.play();
 
-    hero.x = canvas.width / 2;
-    hero.y = canvas.height / 2;
+    hero.x = canvas.width;
+    hero.y = canvas.height / 4;
 };
 
 // Update game objects
@@ -363,5 +363,6 @@ setInterval(function() {
 }, 1);
 setInterval(checkMonsters, 1); //check if a monster should be moved
 setInterval(createMonster, 3000);
+createMonster();//spawn monster at beginning of game
 
 // ----------------- GAME -- END -- Code above is the core game code. ----------------- //
