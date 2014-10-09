@@ -118,7 +118,9 @@ var monster = {
     yDirection: 1
 };
 
+// Game object arrays to keep track of multiple sprites.
 var monsters = [];
+var bullets = [];
 
 /**
  * HIGH SCORE UTILITIES: Score stored using localStorage.
@@ -206,6 +208,20 @@ addEventListener('mousedown', function(e) {
 addEventListener('mouseup', function(e) {
     isMouseHeld = false;
 }, false);
+
+
+/**
+ * GAME UTILITIES: All game related calculations such as colissions and etc.
+ */
+var gameUtilities = {
+    checkForColission: function(a, b) {
+        // Checks for colission by checking if two objects sprites' boxes are overlapping.
+        return a.x < b.x + b.width &&
+            a.x + a.width > b.x &&
+            a.y < b.y + b.height &&
+            a.y + a.height > b.y;
+    }
+}
 
 // Reset the game when the player catches a monster
 var reset = function() {
