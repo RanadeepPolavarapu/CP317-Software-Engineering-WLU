@@ -10,6 +10,7 @@
  * Authors:
  *      Ranadeep Polavarapu - (120443120) - (pola3120@mylaurier.ca)
  *      Bruno Salapic - () - ()
+ *      Bruno Salapic - (100574460) - (sala4460@mylaurier.ca)
  *      Lee Glendenning - (120289190) - (glen9190@mylaurier.ca)
  *      Ryan Burke - (120543180) - (burk3180@mylaurier.ca)
  * 
@@ -36,6 +37,10 @@ window.addEventListener('mousedown', function(e) {
 // ----------------- DEBUG -- END -- Code above is debugging for developer's reference. ----------------- //
 
 // ----------------- GAME -- START -- Code below is the core game code. ----------------- //
+
+// Global Variables
+var CANVAS_HEIGHT = window.innerHeight / 2;
+var CANVAS_WIDTH = window.innerWidth / 2;
 
 // Create the canvas
 var canvas = document.createElement("canvas");
