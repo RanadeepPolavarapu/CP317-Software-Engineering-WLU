@@ -10,6 +10,20 @@ Checklist
 Requirements
 ------
 *  [✖] Choose a project idea by Thursday Oct 23.   
+<!-- 
+*  [✔] The player can move the hero by clicking and dragging using the mouse  
+*  [✔] The canvas' width and height should be half of those of the browser's window.  
+*  [✔] The background image should cover the whole canvas.  
+*  [✔] Every 3 seconds, a new goblin appears in a random position and moves at a random speed;  
+when it hits the edge of the screen, it bounces back in the opposite direction. The goblin should
+move in any random direction, such as up, down, left, right, and, say, 45% diagonally.  
+*  [✔] When the hero catches a goblin the number of goblins caught should be updated. The caught
+goblin should disappear.  
+*  [✔] Use localStorage to store the number of goblins caught. This number should persist and be
+displayed across launches of the game.  
+*  [✔] Add background sound. When the hero catches a goblin, a distinct sound should be played. 
+ -->
+
 
 <!-- 
 Bonus
