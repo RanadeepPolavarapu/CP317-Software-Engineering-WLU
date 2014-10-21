@@ -10,6 +10,7 @@ Checklist
 Requirements
 ------
 *  [✖] Choose a project idea by Thursday Oct 23.   
+
 <!-- 
 *  [✔] The player can move the hero by clicking and dragging using the mouse  
 *  [✔] The canvas' width and height should be half of those of the browser's window.  
