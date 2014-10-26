@@ -23,7 +23,7 @@ Chrome (Same-Origin policy)
 Disable same origin policy:
 
 **OS X**: `open -a Google\ Chrome --args --disable-web-security`  
-**\*NIX variants**: `google-chrome --disable-web-security`  
+**Linux**: `google-chrome --disable-web-security`  
 **WINDOWS**: `chrome.exe --disable-web-security`  
   
 Chrome variation (for Chromium, the parent of Chrome browser): `chromium-browser --disable-web-security`  
