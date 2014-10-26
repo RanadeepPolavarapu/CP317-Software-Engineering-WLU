@@ -9,15 +9,16 @@ Checklist
 =========
 Requirements
 ------
-*  [✔] Step 1: the first level page
-*  [✔] Step 2: the second level page
-*  [✔] Step 3: the third level pages
-*  [✔] For headers and footers, use data-theme = "a". Use only single page files.
-*  [✔] Your app should have a custom icon.
-*  [✔] You can download the jQuery package here.
-*  [✔] Your app should work even when the device has no internet connection. (local jQuery mobile files)
-*  [✔] You can download the jQuery icon pack from here.
-*  [✔] Build and zip as `g4a2.zip`.
+*  [✖] Step 1: the first level page
+*  [✖] Step 2: the second level page
+*  [✖] Step 3: the third level pages
+*  [✖] For headers and footers, use data-theme = "a". Use only single page files.
+*  [✖] Your app should have a custom icon.
+*  [✔] You can download the jQuery mobile package.
+*  [✔] Your app should work even when the device has no internet connection (local jQuery mobile files).
+*  [✖] Add link and script tags to link the JS and CSS jQuery mobile files from local directory.
+*  [✖] You can download the jQuery icon pack from here.
+*  [✖] Build and zip as `g4a2.zip`.
 
 
 Bonus
