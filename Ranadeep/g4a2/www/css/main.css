@@ -9,6 +9,10 @@
     overflow: hidden;
 }
 
+.group-members-list-item {
+    cursor: pointer;
+}
+
 .centered {
     text-align: center;
 }
