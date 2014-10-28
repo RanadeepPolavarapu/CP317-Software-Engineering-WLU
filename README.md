@@ -19,7 +19,7 @@ Requirements
 *  [✔] Add link and script tags to link the JS and CSS jQuery mobile files from local directory.
 *  [✔] You can download the jQuery icon pack from here.
 *  [✔] Build and zip as `g4a2.zip`.
-
+*  [✔] Submitted.
 
 Bonus
 ------
