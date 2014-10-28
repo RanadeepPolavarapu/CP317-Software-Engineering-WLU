@@ -3,4 +3,5 @@ Back button:
 	We did some research on this in GitHub and it turns out to be a bug in the Chrome browser.
 
 Bonus:
-	
+	We created a class called sticky-footer in main.css and made the footer stick to the bottom using css regardless of however large the content is.
+
