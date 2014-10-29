@@ -7,27 +7,21 @@ WLU CP 317 Final Project
 
 Checklist
 =========
-Requirements
-------
-*  [✖] Choose a project idea by Thursday Oct 23.   
-e
-<!-- 
-*  [✔] The player can move the hero by clicking and dragging using the mouse  
-*  [✔] The canvas' width and height should be half of those of the browser's window.  
-*  [✔] The background image should cover the whole canvas.  
-*  [✔] Every 3 seconds, a new goblin appears in a random position and moves at a random speed;  
-when it hits the edge of the screen, it bounces back in the opposite direction. The goblin should
-move in any random direction, such as up, down, left, right, and, say, 45% diagonally.  
-*  [✔] When the hero catches a goblin the number of goblins caught should be updated. The caught
-goblin should disappear.  
-*  [✔] Use localStorage to store the number of goblins caught. This number should persist and be
-displayed across launches of the game.  
-*  [✔] Add background sound. When the hero catches a goblin, a distinct sound should be played. 
- -->
+Deadlines
+-------------
+*  [✔] Choose a project idea by Thursday, Oct. 23 at 4 PM.  
+*  [✖] Signed **timelines-work division document** by Thursday, Oct. 30 at 4 PM.
+*  [✖] Three-page (double spaced) preliminary report on **Requirements** by Thursday, Oct. 30 at 4 PM.   
+*  [✖] Submit signed timelines-work divison document and preliminary report on Requirements in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Oct. 30 at 4 PM.
+*  [✖] Three-page preliminary report on **OO Analysis** by Thursday, Nov. 6 at 4 PM.
+*  [✖] Submit Three-page preliminary report on OO Analysis in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Nov. 6 at 4 PM.
+*  [✖] Three-page preliminary report on **OO Design** (include diagrams) by Thursday, Nov. 13 at 4 PM.
+*  [✖] Submit Three-page preliminary report on **OO Design**  in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Nov. 13 at 4 PM.
+*  [✖] Complete report on **Requirements**, **OO Analysis**, **OO Design** (include diagrams) by Thursday, Nov. 27 at 4 PM.
+*  [✖] Submit complete and final report on **Requirements**, **OO Analysis**, **OO Design**  in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Nov. 27 at 4 PM.
+*  [✖] Signed statement describing the contribution of each individual by Thursday, Nov. 27 at 4 PM. 
+*  [✖] Submit a signed statement describing the contribution of each individual by Thursday, Nov. 27 at 4 PM. 
+*  [✖] Complete app implementation by Monday, Dec. 1 at 11:30 PM.
+*  [✖] Submit final implementation in **.zip** format into MyLearningSpace dropbox by Monday, Dec. 1 at 11:30 PM.
+*  [✖] App Presentation in class on Tuesday, Dec. 2 at 4 PM.
 
-
-<!-- 
-Bonus
-------
-*  [✖] Touching a point P on the screen triggers a bullet firing from the center of the hero to the direction of P, provided P is not in the hero’s icon. You should programmatically destroy the bullet when it hits the screen edge, for otherwise keeping track of a large number of bullets will slow down your game and possibly crash it. A goblin is caught when it is hit by a bullet.
- -->
