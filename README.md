@@ -32,6 +32,7 @@ SSH example: `ssh pola3120@104.131.174.122`
 Backend Folder: `/home/cp317/`  
 
 Accounts and passwords: (All accounts have superuser access).  
+# Mapped out
 `pola3120`  
 `sala4460`: `abc123`  
 `glen9190`: `abc123`  
