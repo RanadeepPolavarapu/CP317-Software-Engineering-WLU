@@ -31,9 +31,7 @@ IP: `104.131.174.122`
 SSH example: `ssh pola3120@104.131.174.122`  
 Backend Folder: `/home/cp317/`  
 
-###Accounts and passwords:
-------------- 
-	Format: `Account: Password`    
+Accounts and passwords:  
 `pola3120`  
 `sala4460`: `abc123`  
 `glen9190`: `abc123`  
