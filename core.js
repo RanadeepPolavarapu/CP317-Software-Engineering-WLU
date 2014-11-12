@@ -8,3 +8,5 @@ var getPostalCodeGeoLocation= $.ajax({
        alert( httpMessage );
     }
 });
+
+// Note: Check for access control origin header on hopper's response headers, if it doesn't exist, set cordova access control to include hopper.
