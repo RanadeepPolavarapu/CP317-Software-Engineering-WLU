@@ -27,13 +27,13 @@ Deadlines
 
 Backend Server
 -------------
-IP: `104.131.174.122`
-SSH example: `ssh pola3120@104.131.174.122`
-Backend Folder: `/home/cp317/`
+IP: `104.131.174.122`  
+SSH example: `ssh pola3120@104.131.174.122`  
+Backend Folder: `/home/cp317/`  
 
-Accounts and passwords: (All accounts have superuser access).
-`pola3120`
-`sala4460`: `abc123`
-`glen9190`: `abc123`
-`burk3180`: `abc123`
-`cp317` (General account for home folder)
+Accounts and passwords: (All accounts have superuser access).  
+`pola3120`  
+`sala4460`: `abc123`  
+`glen9190`: `abc123`  
+`burk3180`: `abc123`  
+`cp317` (General account for home folder)  
