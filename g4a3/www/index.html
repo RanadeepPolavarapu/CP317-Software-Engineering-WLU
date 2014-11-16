@@ -66,7 +66,7 @@
         <div role="main" data-role="content" class="ui-content main-content centered">
             <form id="postal-code-lookup-form">
                 <label for="postal-code-lookup">Enter Postal Code:</label>
-                <input type="search" name="postalCode" id="postal-code-lookup" placeholder="enter postal code here...">
+                <input type="search" name="zip" id="postal-code-lookup" placeholder="enter postal code">
                 <button type="submit" class="submit-button" id="submit-button">GET LOCATION</button>
             </form>
         </div>
@@ -76,6 +76,7 @@
     <!-- Supplemental JS linked at the bottom to be non-blocking. Placing these in head will slow down page loads and is never recommended. -->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/core.js"></script>
 </body>
 
 </html>
