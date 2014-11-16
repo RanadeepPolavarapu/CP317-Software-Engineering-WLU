@@ -15,8 +15,8 @@ Deadlines
 *  [✔] Submit signed timelines-work divison document and preliminary report on Requirements in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Oct. 30 at 4 PM.
 *  [✔] Three-page preliminary report on **OO Analysis** by Thursday, Nov. 6 at 4 PM.
 *  [✔] Submit Three-page preliminary report on OO Analysis in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Nov. 6 at 4 PM.
-*  [✖] Three-page preliminary report on **OO Design** (include diagrams) by Thursday, Nov. 13 at 4 PM.
-*  [✖] Submit Three-page preliminary report on **OO Design**  in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Nov. 13 at 4 PM.
+*  [✔] Three-page preliminary report on **OO Design** (include diagrams) by Thursday, Nov. 13 at 4 PM.
+*  [✔] Submit Three-page preliminary report on **OO Design**  in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Nov. 13 at 4 PM.
 *  [✖] Complete report on **Requirements**, **OO Analysis**, **OO Design** (include diagrams) by Thursday, Nov. 27 at 4 PM.
 *  [✖] Submit complete and final report on **Requirements**, **OO Analysis**, **OO Design**  in MyLearningSpace dropbox and **HARDCOPY** in class by Thursday, Nov. 27 at 4 PM.
 *  [✖] Signed statement describing the contribution of each individual by Thursday, Nov. 27 at 4 PM. 
