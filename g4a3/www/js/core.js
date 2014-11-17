@@ -36,7 +36,7 @@ function postalCodeLookup() {
             url: baseURL,
             data: $("#postal-code-lookup-form").serialize(), // serializes the postal code form's elements.
             success: function(response) {
-                alert("The postal code " + postalCodeSearched + " is located at " + response); // Display the response in an alert.
+                alert("The postal code " + postalCodeSearched + " is located at \n" + response); // Display the response in an alert.
             },
         });
     });
