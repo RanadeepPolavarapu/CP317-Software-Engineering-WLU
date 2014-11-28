@@ -32,8 +32,4 @@ SSH example: `ssh pola3120@104.131.174.122`
 Backend Folder: `/home/cp317/`  
 
 Accounts and passwords:  
-`pola3120`  
-`sala4460`: `abc123`  
-`glen9190`: `abc123`  
-`burk3180`: `abc123`  
-`cp317` (General account for home folder)  
+`Accounts and passwords were removed since repo is now public.`
