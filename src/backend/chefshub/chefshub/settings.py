@@ -24,7 +24,11 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+	'localhost',
+	'127.0.0.1',
+	'cp317.ff.gg',
+]
 
 
 # Application definition
@@ -58,8 +62,12 @@ WSGI_APPLICATION = 'chefshub.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cookingdb',
+        'USER': 'postgres',
+        'PASSWORD': 'abc123',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -78,6 +86,24 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = "/home/cp317/productionenv/static/"
+
+STATIC_URL = '//s.cdn.cp317.ff.gg/'
+# STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    BASE_DIR + '/static/',  # global project wide static folder.
+)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+# Templates DIR
+
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
