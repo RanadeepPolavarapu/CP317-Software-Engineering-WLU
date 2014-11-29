@@ -6,6 +6,8 @@ urlpatterns = patterns('',
 	# ex: /summoner/
 	url(r'^$', views.index, name='index'),
 	
+	url(r'^auth/user/login.json/?$', views.auth_ajax_login),
+	url(r'^auth/user/is_authenticated.json/?$', views.auth_is_authenticated),
 #     url(r'^ajax/update.json/?$', views.ajax_update_official_api),
 # 	url(r'^ajax/register.json/?$', views.ajax_register_official_api),
 # 	# Debug purposes.
