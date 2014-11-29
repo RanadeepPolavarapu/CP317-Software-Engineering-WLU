@@ -2,9 +2,6 @@ from django.conf.urls import patterns, url
 
 from api import views
 
-from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
-
 urlpatterns = patterns('',
 	# ex: /summoner/
 	url(r'^$', views.index, name='index'),
