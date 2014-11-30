@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+import uuid
+import os
+
+def get_file_path(instance, filename):
+	ext = filename.split('.')[-1]
+	filename = "%s.%s" % (uuid.uuid4(), ext)
+	return os.path.join('uploads/logos', filename)
+
 class Recipe(models.Model):
 	id = models.AutoField(primary_key=True)
 	recipe_name = models.CharField(max_length=50)
@@ -15,6 +23,11 @@ class Recipe(models.Model):
 	sources = models.ManyToManyField(Source, blank=True)
 	serving_string = models.ForeignKey(ServingString, null=True, blank=True)
 	serving_value = models.IntegerField(null=True, blank=True)
+	
+	photo = models.ImageField(upload_to=get_file_path,
+                        null=True,
+                        blank=True,
+                        verbose_name="the Recipe's image")
 	
 	meta_last_modified = models.DateTimeField(auto_now=True)
 	meta_date_created = models.DateTimeField(auto_now_add=True)

@@ -104,6 +104,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+# Media Files (File Uploads)
+MEDIA_ROOT = "/home/cp317/productionenv/media/"
+
+MEDIA_URL = '//m.cdn.cp317.ff.gg/'
+
 # Templates DIR
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
