@@ -101,7 +101,11 @@ def ajax_auth_register(request):
 @csrf_exempt
 def ajax_auth_is_authenticated(request):
 	if request.user.is_authenticated():
-		return JsonResponse( {'success': True, 'data': {'is_authenticated': True}} , safe=False)
+		print(request.user.id)
+		result = {}
+		for field in request.user._meta.fields:
+			result[field.name] = field.value_to_string(request.user)
+		return JsonResponse( {'success': True, 'data': {'is_authenticated': True, 'user_data': result}} , safe=False)
 	else:
 		return JsonResponse( {'success': True, 'data': {'is_authenticated': False}} , safe=False)
 
