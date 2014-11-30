@@ -16,7 +16,7 @@ class Recipe(models.Model):
 	serving_string = models.ForeignKey(ServingString, null=True, blank=True)
 	serving_value = models.IntegerField(null=True, blank=True)
 	
-	meta_last_updated = models.DateTimeField(auto_now=True)
+	meta_last_modified = models.DateTimeField(auto_now=True)
 	meta_date_created = models.DateTimeField(auto_now_add=True)
 	
 	user = models.ForeignKey(User, verbose_name="the owner of this recipe", blank=True, null=True, on_delete=models.CASCADE)
