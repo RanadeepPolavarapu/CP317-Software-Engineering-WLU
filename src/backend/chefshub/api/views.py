@@ -5,6 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
+from api.models import *
+
 # Create your views here.
 
 def index(request):
@@ -67,6 +69,10 @@ def ajax_auth_register(request):
 			user.first_name = first_name
 			user.last_name = last_name
 			user.save()
+			
+			ch_user = CHUser(id=user.id, user=user)
+			ch_user.save()
+			
 			result = {}
 			for field in user._meta.fields:
 				result[field.name] = field.value_to_string(user)
@@ -86,6 +92,10 @@ def ajax_auth_register(request):
 			user.first_name = first_name
 			user.last_name = last_name
 			user.save()
+			
+			ch_user = CHUser(id=user.id, user=user)
+			ch_user.save()
+			
 			result = {}
 			for field in user._meta.fields:
 				result[field.name] = field.value_to_string(user)
