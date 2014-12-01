@@ -229,7 +229,6 @@ var CHEFSHUB = {
             $('#recipe-data').empty();
             $('#recipe-data').listview('refresh');
             $.each(recipeData.data, function(i, row) {
-            	console.log(recipeInfo);
                 if (row.id == recipeInfo.id) {
                     $('#recipe-data').append('<img src="http://m.cdn.cp317.ff.gg/' + row.photo + '">');
                     $('#recipe-data').append('<li>Title: <b>' + row.recipe_name + '</b></li>');
@@ -274,6 +273,20 @@ var CHEFSHUB = {
                     $("#chefshub-statistics").append('<h5><u>ChefsHub Statistics</u></h5>Users: ' + response['data']['User'] + '. <br>Total Recipes: ' + response['data']['Recipe'] + '.');
                 } else {
                     $("#chefshub-statistics").append('<h5>Error fetching statistics.</h5>');
+                }
+            },
+        });
+    },
+
+    recipeConvertPhotoURLToImageField: function() {
+        var ajaxConvertPhotoURLToImageField = 'http://cp317.ff.gg/api/recipe/photourl_to_imagefield.json/';
+
+        $.ajax({
+            type: "GET", // Make a GET request.
+            url: ajaxConvertPhotoURLToImageField,
+            success: function(response) {
+                if (response['success']) {
+                    console.log("Recipe Model images stabilized!");
                 }
             },
         });

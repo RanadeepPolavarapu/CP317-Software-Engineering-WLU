@@ -38,6 +38,38 @@ $.noty.defaults = {
     buttons: false // an array of buttons
 };
 
+// JavaScript & HTML utilities. Ex: String escaping HTML for JS compatibility.
+var Utilities = {
+    entityMap: {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': '&quot;',
+        "'": '&#39;',
+        "/": '&#x2F;',
+    },
+
+    escapeHtml: function(string) {
+        return String(string).replace(/[&<>"'\/]/g, function(s) {
+            return Utilities.entityMap[s];
+        });
+    },
+};
+
+// Cordova API specific for android devices to access camera and photo gallery.
+var AndroidUtilities = {
+    getPhotoWithSize: function(source) {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+            quality: 50,
+            targetWidth: 960,
+            targetHeight: 960,
+            destinationType: destinationType.FILE_URI,
+            sourceType: source
+        });
+    },
+};
+
 // ChefsHub global namespace.
 var CHEFSHUB = {
     User: {
@@ -62,6 +94,33 @@ var CHEFSHUB = {
                         CHEFSHUB.User.userLoginFailure(response['errormsg']);
                     }
                     // Do not do anything on success. Success is handled by HTML page inline script.
+                },
+            });
+        },
+
+        userLogout: function() {
+            var authLogoutURLRoute = "http://cp317.ff.gg/api/auth/user/logout.json";
+
+            $.ajax({
+                type: "POST", // Make a POST request.
+                url: authLogoutURLRoute,
+                success: function(response) {
+                    if (response['success'] === false) {
+                        noty({
+                            text: 'You have successfully logged out! <br>Please wait...you are being redirected to the main page.',
+                            type: 'warning',
+                            timeout: true,
+                            animation: {
+                                open: 'animated bounceInLeft', // Animate.css class names
+                                close: 'animated bounceOutLeft', // Animate.css class names
+                                easing: 'swing', // unavailable - no need
+                                speed: 500 // unavailable - no need
+                            }
+                        });
+                        setTimeout(function() {
+                            window.location.replace("index.html");
+                        }, 3000);
+                    }
                 },
             });
         },
@@ -122,8 +181,11 @@ var CHEFSHUB = {
                 success: function(response) {
                     if (response['success']) {
                         $("#verified-user").append('<h4><u>User Verified</u></h4> <p>Logged in as: ' + response['data']['user_data']['username'] + '.');
+                        $("#sign-in-button").replaceWith('<button onclick="CHEFSHUB.User.userLogout();" data-theme="b" id="sign-in-button" class="ui-btn-right ui-btn ui-btn-b ui-shadow ui-corner-all"><i class="user icon"></i>Logout</button>');
+
                     } else {
                         $("#verified-user").append('<h5>User not logged in. <br>Please sign in.</h5>');
+                        $("#sign-in-button").replaceWith('<button onclick="window.location.replace(\'login-or-register.html\');" data-theme="b" id="sign-in-button" class="ui-btn-right ui-btn ui-btn-b ui-shadow ui-corner-all"><i class="signup icon"></i>Sign In</button>');
                     }
                 },
             });
@@ -149,16 +211,60 @@ var CHEFSHUB = {
                     url: searchURLRoute,
                     data: $("#recipe-search-form").serialize(), // serializes the recipe search form's elements.
                     success: function(response) {
-                        console.log(response); // Display the response in an alert.
+                        CHEFSHUB.searchRecipeFillListview(response);
                     },
                 });
             });
         });
     },
 
+    searchRecipeFillListview: function(recipeData) {
+        $('#recipe-list').empty();
+        $.each(recipeData.data, function(i, row) {
+            $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+            $('#recipe-list').listview('refresh');
+        });
+
+        $(document).on('pagebeforeshow', '#headline', function() {
+            $('#recipe-data').empty();
+            $('#recipe-data').listview('refresh');
+            $.each(recipeData.data, function(i, row) {
+                if (row.id == recipeInfo.id) {
+                    $('#recipe-data').append('<img src="http://m.cdn.cp317.ff.gg/' + row.photo + '">');
+                    $('#recipe-data').append('<li>Title: <b>' + row.recipe_name + '</b></li>');
+                    $('#recipe-data').append('<li>Description: ' + row.description + '</li>');
+                    $('#recipe-data').append('<li>Author: ' + row.owner + '</li>');
+                    $('#recipe-data').append('<li style="white-space:normal;">Ingredients: <pre>' + row.ingredients + '</pre></li>');
+                    $('#recipe-data').append('<li style="white-space:normal;">Directions: <pre>' + row.directions + '</pre></li>');
+                    $('#recipe-data').append('<li>Preparation Time: ' + row.prep_time + '</li>');
+                    $('#recipe-data').append('<li>Cooking Time: ' + row.cook_time + '</li>');
+                    $('#recipe-data').append('<li>Serves: ' + row.serving_value + ' people </li>');
+                    $('#recipe-data').append('<li>Rating: ' + row.rating + '/5' + '</li>');
+                    $('#recipe-data').append('<li>Difficulty: ' + row.difficulty + '/5' + '</li>');
+                    $('#recipe-data').append('<li>Cuisine Type: ' + row.cuisine_type + '</li>');
+
+                    $('#recipe-data').listview('refresh');
+                }
+            });
+        });
+
+        $(document).on('vclick', '#recipe-list li a', function() {
+            recipeInfo.id = $(this).attr('data-id');
+            $.mobile.changePage("#headline", {
+                transition: "slide",
+                changeHash: false,
+            });
+        });
+
+        var recipeInfo = {
+            id: null,
+            result: recipeData['data'],
+        };
+    },
+
     getChefsHubStatistics: function() {
         var statisticsURLRoute = 'http://cp317.ff.gg/api/recipe/statistics.json';
-        
+
         $.ajax({
             type: "GET", // Make a GET request.
             url: statisticsURLRoute,
@@ -222,7 +328,7 @@ var CHEFSHUB = {
         var recipeInfo = {
             id: null,
             result: null
-        }
+        };
 
         var ajax = {
             recipeParseJSON: function(result) {
@@ -232,6 +338,6 @@ var CHEFSHUB = {
                 });
                 $('#recipe-list').listview('refresh');
             }
-        }
+        };
     }
 }

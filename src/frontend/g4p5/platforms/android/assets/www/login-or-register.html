@@ -58,7 +58,7 @@
 
 <body>
     <div data-role="page" id="home">
-        <div data-theme="b" data-role="header">
+        <div data-theme="b" data-role="header" id="jqm-chefshub-header">
             <a onclick="window.location.replace('index.html');" data-icon="arrow-l" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Go Back</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
             <h3>ChefsHub - Login</h3>
             <a href="index.html" data-theme="b"><i class="signup icon"></i>Sign In</a>
@@ -67,9 +67,9 @@
             <div data-role="tabs" id="tabs">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#one" data-ajax="false">Login</a>
+                        <li><a href="#one" data-ajax="false" id="login-tab">Login</a>
                         </li>
-                        <li><a href="#two" data-ajax="false">Register</a>
+                        <li><a href="#two" data-ajax="false" id="register-tab">Register</a>
                         </li>
                     </ul>
                 </div>
@@ -112,11 +112,11 @@
                             </div>
                             <div data-role="fieldcontain">
                                 <label for="first_name">First Name:</label>
-                                <input type="first_name" value="" name="first_name" id="first_name" />
+                                <input type="text" value="" name="first_name" id="first_name" />
                             </div>
                             <div data-role="fieldcontain">
                                 <label for="last_name">Last Name:</label>
-                                <input type="last_name" value="" name="last_name" id="last_name" />
+                                <input type="text" value="" name="last_name" id="last_name" />
                             </div>
                             <input type="submit" data-theme="b" name="submit" id="submit" value="Sign Up">
                         </fieldset>
@@ -138,6 +138,10 @@
     <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
+        $(function() {
+            $('#login-tab').trigger('click'); // Make the login tab active by triggering it with a programatic click.
+        });
+
         $('#user-login-form').submit(function(event) {
 
             // Lock and prevent the default form from actually submitting.

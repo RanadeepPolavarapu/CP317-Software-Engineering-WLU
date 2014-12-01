@@ -31,6 +31,7 @@
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/cordova.js \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/cordova_plugins.js \
+/Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/create-recipe.html \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/css \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/dist \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/img \
@@ -39,7 +40,6 @@
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/login-or-register.html \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/plugins \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/search-results.html \
-/Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/test.html \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/css/animate.css \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/css/index.css \
 /Users/RanadeepPolavarapu/GitHub/CP317-Final-Project/src/frontend/g4p5/platforms/android/assets/www/css/main.css \
