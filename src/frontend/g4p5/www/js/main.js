@@ -1,4 +1,4 @@
-// Shorthand for $( document ).ready()
+// Shorthand for $( document ).ready() (On DOM Ready)
 $(function() {
 	// Enable timeago plugin for abbr tag with class "timeago".
     $("abbr.timeago").timeago();
@@ -18,7 +18,7 @@ var CHEFSHUB = {
                     ajax.recipeParseJSON(result);
                 },
                 error: function(request, error) {
-                    alert('Network error has occurred please try again!');
+                    alert('Error: We were unable to fetch the data. A network error has occurred please try again!');
                 }
             });
         });
@@ -35,7 +35,7 @@ var CHEFSHUB = {
                     $('#recipe-data').append('<li style="white-space:normal;">Directions: <pre>' + row.directions + '</pre></li>');
                     $('#recipe-data').append('<li>Preparation Time: ' + row.prep_time + '</li>');
                     $('#recipe-data').append('<li>Cooking Time: ' + row.cook_time + '</li>');
-                    $('#recipe-data').append('<li>Serves: ' + row.serving_value + 'people </li>');
+                    $('#recipe-data').append('<li>Serves: ' + row.serving_value + ' people </li>');
                     $('#recipe-data').append('<li>Rating: ' + row.rating + '/5' + '</li>');
                     $('#recipe-data').append('<li>Difficulty: ' + row.difficulty + '/5' + '</li>');
                     $('#recipe-data').append('<li>Cuisine Type: ' + row.cuisine_type + '</li>');

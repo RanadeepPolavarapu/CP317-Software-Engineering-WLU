@@ -20,8 +20,8 @@
 <!-- 
     ===============================================================
     Title: index.html
-    Project: Assignment #3
-    Date: Tuesday, Nov. 18, 2014
+    Project: Final Project Implementation (P5)
+    Date: Tuesday, Dec. 1, 2014
     Written for: CP317-A
     Authors: (Group #4)
         Ranadeep Polavarapu - (120443120) - (pola3120@mylaurier.ca)
@@ -44,128 +44,60 @@
     <link rel="stylesheet" charset="utf-8" type="text/css" href="css/index.css" />
     <link rel="stylesheet" charset="utf-8" type="text/css" href="css/main.css" />
     <link rel="stylesheet" charset="utf-8" type="text/css" href="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.css" />
-<!--     <link rel="stylesheet" charset="utf-8" type="text/css" href="js/vendor/jquery.mobile-1.4.4/jquery.mobile.theme-1.4.4.min.css" /> -->
+    <!--     <link rel="stylesheet" charset="utf-8" type="text/css" href="js/vendor/jquery.mobile-1.4.4/jquery.mobile.theme-1.4.4.min.css" /> -->
     <link rel="stylesheet" charset="utf-8" type="text/css" href="dist/semantic.min.css" />
 
     <!-- JS links -->
-    <script src="js/vendor/jquery-2.1.1/jquery-2.1.1.min.js"></script>
-    <script src="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.js"></script>
-    <script src="dist/semantic.min.js"></script>
-
-    <title>g4a3 - Postal Code Lookup</title>
+    <script type="text/javascript" src="js/vendor/jquery-2.1.1/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script type="text/javascript" src="dist/semantic.min.js"></script>
+    
+    <title>g4p5 - ChefsHub Home Page</title>
 </head>
 
 <body>
-<style>
-.ui-content {
-    padding: 0 !important;
-}
- 
-.ui-listview {
-    margin: 0 !important;
-}
- 
-.example-wrapper, .example-wrapper div.iscroll-scroller {
-    width: 100% !important;
-}
-</style>
-
-    <div data-role="page">
-
-        <!-- Page HEADER -->
-        <div data-role="header" data-theme="b" class="ui-header ui-bar-b" role="banner">
-            <h1 class="ui-title" role="heading" aria-level="1">ChefsHub</h1>
+    <div data-role="page" id="home">
+        <div data-theme="b" data-role="header">
+        	<a href="index.html" data-icon="delete" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Cancel</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h3>ChefsHub - Recent Recipes</h3>
+       		<a href="index.html" data-theme="b"><i class="signup icon"></i>Sign In</a>
         </div>
+        <div data-role="content">
+            <div class="example-wrapper" data-iscroll>
+                <ul data-role="listview" id="recipe-list" data-theme="a">
 
-        <!-- Page MAIN content -->
-        <div role="main" data-role="content" class="ui-content main-content centered">
-        	<div class="example-wrapper" data-iscroll>
-            	<ul data-role="listview"  id="movie-list" data-theme="a">
-                
-            	</ul>
-        	</div>
-    	</div>
-    	
-        <div class="ui-btn-active ui-state-persist sticky-footer ui-footer ui-bar-a ui-footer-fixed slideup" data-position="fixed" data-role="footer" data-theme="a" role="contentinfo">
+                </ul>
+            </div>
+        </div>
+        <div class="ui-btn-active ui-state-persist sticky-footer ui-footer ui-bar-a ui-footer-fixed slideup" data-position="fixed" data-role="footer" data-theme="b" role="contentinfo">
             <h1>Copyright © 2014 ChefsHub. All rights reserved.</h1>
         </div>
     </div>
-    
+
     <div data-role="page" id="headline">
-    <div data-theme="a" data-role="header">
-        <a href="#home" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>                        
-        <h3>
-            Movie Info
+        <div data-theme="b" data-role="header">
+            <a href="#home" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
+            <h3>
+            Recipe Info
         </h3>
-    </div>        
-    <div data-role="content">
-        <ul data-role="listview"  id="movie-data" data-theme="a">
-            
-        </ul>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview" id="recipe-data" data-theme="a">
+
+            </ul>
+        </div>
     </div>
-</div>    
 
     <!-- Supplemental JS linked at the bottom to be non-blocking. Placing these in head will slow down page loads and is never recommended. -->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/handlebars-utility.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 
-    
     <script type="text/javascript">
-$(document).on('pageinit', '#home', function() {
-    var url = 'http://cp317.ff.gg/api/recipe/get_recent.json/';
-
-    $.ajax({
-        url: url,
-        dataType: "json",
-        async: true,
-        success: function(result) {
-            ajax.parseJSONP(result);
-        },
-        error: function(request, error) {
-            alert('Network error has occurred please try again!');
-        }
-    });
-});
-
-$(document).on('pagebeforeshow', '#headline', function() {
-    $('#movie-data').empty();
-    $.each(movieInfo.result, function(i, row) {
-        if (row.id == movieInfo.id) {
-            $('#movie-data').append('<li><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '"></li>');
-            $('#movie-data').append('<li>Title: ' + row.recipe_name + '</li>');
-            //             $('#movie-data').append('<li>Release date'+row.release_date+'</li>');
-            $('#movie-data').append('<li>Popularity : ' + row.rating + '</li>');
-            //             $('#movie-data').append('<li>Popularity : '+row.vote_average+'</li>');             
-            $('#movie-data').listview('refresh');
-        }
-    });
-});
-
-$(document).on('vclick', '#movie-list li a', function() {
-    movieInfo.id = $(this).attr('data-id');
-    $.mobile.changePage("#headline", {
-        transition: "slide",
-        changeHash: false
-    });
-});
-
-var movieInfo = {
-    id: null,
-    result: null
-}
-
-var ajax = {
-    parseJSONP: function(result) {
-        movieInfo.result = result.results;
-        $.each(result.results, function(i, row) {
-            console.log(JSON.stringify(row));
-            $('#movie-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg' + row.photo + '"/><h3>' + row.recipe_name + '</h3><p>' + row.rating + '/10</p></a></li>');
-        });
-        $('#movie-list').listview('refresh');
-    }
-}
-	</script>
+    	CHEFSHUB.indexPageFetchDataByCTIME();
+    </script>
 </body>
 
 </html>
