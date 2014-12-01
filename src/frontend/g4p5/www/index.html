@@ -44,8 +44,8 @@
     <link rel="stylesheet" charset="utf-8" type="text/css" href="css/index.css" />
     <link rel="stylesheet" charset="utf-8" type="text/css" href="css/main.css" />
     <link rel="stylesheet" charset="utf-8" type="text/css" href="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.css" />
-    <link rel="stylesheet" charset="utf-8" type="text/css" href="js/vendor/jquery.mobile-1.4.4/jquery.mobile.theme-1.4.4.min.css" />
-    <link rel="stylesheet" type="text/css" class="ui" href="dist/semantic.min.css">
+<!--     <link rel="stylesheet" charset="utf-8" type="text/css" href="js/vendor/jquery.mobile-1.4.4/jquery.mobile.theme-1.4.4.min.css" /> -->
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="dist/semantic.min.css" />
 
     <!-- JS links -->
     <script src="js/vendor/jquery-2.1.1/jquery-2.1.1.min.js"></script>
@@ -56,27 +56,116 @@
 </head>
 
 <body>
+<style>
+.ui-content {
+    padding: 0 !important;
+}
+ 
+.ui-listview {
+    margin: 0 !important;
+}
+ 
+.example-wrapper, .example-wrapper div.iscroll-scroller {
+    width: 100% !important;
+}
+</style>
+
     <div data-role="page">
 
         <!-- Page HEADER -->
         <div data-role="header" data-theme="b" class="ui-header ui-bar-b" role="banner">
-            <h1 class="ui-title" role="heading" aria-level="1">G4A3 - POSTAL CODE SEARCH</h1>
+            <h1 class="ui-title" role="heading" aria-level="1">ChefsHub</h1>
         </div>
 
         <!-- Page MAIN content -->
         <div role="main" data-role="content" class="ui-content main-content centered">
-            <form id="postal-code-lookup-form">
-                <label for="postal-code-lookup">Enter Postal Code:</label>
-                <input type="search" name="zip" id="postal-code-lookup" placeholder="enter postal code">
-                <button type="submit" class="submit-button" id="submit-button">GET LOCATION</button>
-            </form>
+        	<div class="example-wrapper" data-iscroll>
+            	<ul data-role="listview"  id="movie-list" data-theme="a">
+                
+            	</ul>
+        	</div>
+    	</div>
+    	
+        <div class="ui-btn-active ui-state-persist sticky-footer ui-footer ui-bar-a ui-footer-fixed slideup" data-position="fixed" data-role="footer" data-theme="a" role="contentinfo">
+            <h1>Copyright © 2014 ChefsHub. All rights reserved.</h1>
         </div>
     </div>
+    
+    <div data-role="page" id="headline">
+    <div data-theme="a" data-role="header">
+        <a href="#home" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>                        
+        <h3>
+            Movie Info
+        </h3>
+    </div>        
+    <div data-role="content">
+        <ul data-role="listview"  id="movie-data" data-theme="a">
+            
+        </ul>
+    </div>
+</div>    
 
     <!-- Supplemental JS linked at the bottom to be non-blocking. Placing these in head will slow down page loads and is never recommended. -->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/core.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+
+    
+    <script type="text/javascript">
+$(document).on('pageinit', '#home', function() {
+    var url = 'http://cp317.ff.gg/api/recipe/get_recent.json/';
+
+    $.ajax({
+        url: url,
+        dataType: "json",
+        async: true,
+        success: function(result) {
+            ajax.parseJSONP(result);
+        },
+        error: function(request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+});
+
+$(document).on('pagebeforeshow', '#headline', function() {
+    $('#movie-data').empty();
+    $.each(movieInfo.result, function(i, row) {
+        if (row.id == movieInfo.id) {
+            $('#movie-data').append('<li><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '"></li>');
+            $('#movie-data').append('<li>Title: ' + row.recipe_name + '</li>');
+            //             $('#movie-data').append('<li>Release date'+row.release_date+'</li>');
+            $('#movie-data').append('<li>Popularity : ' + row.rating + '</li>');
+            //             $('#movie-data').append('<li>Popularity : '+row.vote_average+'</li>');             
+            $('#movie-data').listview('refresh');
+        }
+    });
+});
+
+$(document).on('vclick', '#movie-list li a', function() {
+    movieInfo.id = $(this).attr('data-id');
+    $.mobile.changePage("#headline", {
+        transition: "slide",
+        changeHash: false
+    });
+});
+
+var movieInfo = {
+    id: null,
+    result: null
+}
+
+var ajax = {
+    parseJSONP: function(result) {
+        movieInfo.result = result.results;
+        $.each(result.results, function(i, row) {
+            console.log(JSON.stringify(row));
+            $('#movie-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg' + row.photo + '"/><h3>' + row.recipe_name + '</h3><p>' + row.rating + '/10</p></a></li>');
+        });
+        $('#movie-list').listview('refresh');
+    }
+}
+	</script>
 </body>
 
 </html>

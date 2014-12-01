@@ -1,0 +1,21 @@
+.listview-image-centered {
+    /* Absolute centered with left justified. Square images will auto scale but this is for non-square images. */
+    margin: auto; 
+    position: absolute; 
+    top: 0; 
+    left:0; 
+    bottom:0; 
+    right:-1;
+}
+
+.ui-content {
+    padding: 0 !important;
+}
+ 
+.ui-listview {
+    margin: 0 !important;
+}
+ 
+.example-wrapper, .example-wrapper div.iscroll-scroller {
+    width: 100% !important;
+}
