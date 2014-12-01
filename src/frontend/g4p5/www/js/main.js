@@ -38,6 +38,24 @@ $.noty.defaults = {
     buttons: false // an array of buttons
 };
 
+var Utilities = {
+    entityMap: {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': '&quot;',
+        "'": '&#39;',
+        "/": '&#x2F;',
+    },
+
+    escapeHtml: function(string) {
+        return String(string).replace(/[&<>"'\/]/g, function(s) {
+            return Utilities.entityMap[s];
+        });
+    },
+};
+
+
 // ChefsHub global namespace.
 var CHEFSHUB = {
     User: {
@@ -62,6 +80,33 @@ var CHEFSHUB = {
                         CHEFSHUB.User.userLoginFailure(response['errormsg']);
                     }
                     // Do not do anything on success. Success is handled by HTML page inline script.
+                },
+            });
+        },
+
+        userLogout: function() {
+            var authLogoutURLRoute = "http://cp317.ff.gg/api/auth/user/logout.json";
+
+            $.ajax({
+                type: "POST", // Make a POST request.
+                url: authLogoutURLRoute,
+                success: function(response) {
+                    if (response['success'] === false) {
+                        noty({
+                            text: 'You have successfully logged out! <br>Please wait...you are being redirected to the home page.',
+                            type: 'warning',
+                            timeout: true,
+                            animation: {
+                                open: 'animated bounceInLeft', // Animate.css class names
+                                close: 'animated bounceOutLeft', // Animate.css class names
+                                easing: 'swing', // unavailable - no need
+                                speed: 500 // unavailable - no need
+                            }
+                        });
+                        setTimeout(function() {
+                            window.location.replace("index.html");
+                        }, 3000);
+                    }
                 },
             });
         },
@@ -122,8 +167,11 @@ var CHEFSHUB = {
                 success: function(response) {
                     if (response['success']) {
                         $("#verified-user").append('<h4><u>User Verified</u></h4> <p>Logged in as: ' + response['data']['user_data']['username'] + '.');
+                        $("#sign-in-button").replaceWith('<button onclick="CHEFSHUB.User.userLogout();" data-theme="b" id="sign-in-button" class="ui-btn-right ui-btn ui-btn-b ui-shadow ui-corner-all"><i class="user icon"></i>Logout</button>');
+
                     } else {
                         $("#verified-user").append('<h5>User not logged in. <br>Please sign in.</h5>');
+                        $("#sign-in-button").replaceWith('<button onclick="window.location.replace(\'login-or-register.html\');" data-theme="b" id="sign-in-button" class="ui-btn-right ui-btn ui-btn-b ui-shadow ui-corner-all"><i class="signup icon"></i>Sign In</button>');
                     }
                 },
             });
@@ -150,15 +198,24 @@ var CHEFSHUB = {
                     data: $("#recipe-search-form").serialize(), // serializes the recipe search form's elements.
                     success: function(response) {
                         console.log(response); // Display the response in an alert.
+                        CHEFSHUB.searchRecipeFillListview(response);
                     },
                 });
             });
         });
     },
 
+    searchRecipeFillListview: function(recipeData) {
+        $('#recipe-list').empty();
+        $.each(recipeData.data, function(i, row) {
+            $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+            $('#recipe-list').listview('refresh');
+        });
+    },
+
     getChefsHubStatistics: function() {
         var statisticsURLRoute = 'http://cp317.ff.gg/api/recipe/statistics.json';
-        
+
         $.ajax({
             type: "GET", // Make a GET request.
             url: statisticsURLRoute,
