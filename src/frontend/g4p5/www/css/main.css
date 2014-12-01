@@ -59,3 +59,7 @@ html, body {
 .example-wrapper, .example-wrapper div.iscroll-scroller {
     width: 100% !important;
 }
+
+.like-button {
+    padding-left:100px;
+}

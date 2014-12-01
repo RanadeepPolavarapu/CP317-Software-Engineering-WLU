@@ -278,6 +278,20 @@ var CHEFSHUB = {
         });
     },
 
+    recipeConvertPhotoURLToImageField: function() {
+        var ajaxConvertPhotoURLToImageField = 'http://cp317.ff.gg/api/recipe/photourl_to_imagefield.json/';
+
+        $.ajax({
+            type: "GET", // Make a GET request.
+            url: ajaxConvertPhotoURLToImageField,
+            success: function(response) {
+                if (response['success']) {
+                    console.log("Recipe Model images stabilized!");
+                }
+            },
+        });
+    },
+
     indexPageFetchDataByCreateTime: function() {
         $(document).on('pageinit', '#home', function() {
             var url = 'http://cp317.ff.gg/api/recipe/get_recent.json/';

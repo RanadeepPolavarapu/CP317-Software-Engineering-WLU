@@ -78,7 +78,8 @@
                         <input type="file" value="" name="photo" id="photo" />
                     </div>
                     <div data-role="fieldcontain">
-                        <a data-role="button" onClick="uploadFromGallery();">Upload from Gallery</a> 
+                        <label for="photo_url">Image URL:</label>
+                        <input type="text" value="" name="photo_url" id="photo_url" />
                     </div>
                     <div data-role="fieldcontain">
                         <label for="description">Description:</label>
@@ -163,47 +164,6 @@
             });
         })
 
-        function uploadFromGallery() {
-
-            // Retrieve image file location from specified source
-            navigator.camera.getPicture(uploadPhoto,
-                function(message) {
-                    alert('get picture failed');
-                }, {
-                    quality: 50,
-                    destinationType: navigator.camera.DestinationType.FILE_URI,
-                    sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
-                }
-            );
-
-        }
-
-        function uploadPhoto(imageURI) {
-            var options = new FileUploadOptions();
-            options.fileKey = "file";
-            options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1) + '.png';
-            options.mimeType = "text/plain";
-
-            var params = new Object();
-
-            options.params = params;
-
-            var ft = new FileTransfer();
-            ft.upload(imageURI, encodeURI("http://cp317.ff.gg/api/recipe/create_recipe.json"), win, fail, options);
-        }
-
-        function win(r) {
-            console.log("Code = " + r.responseCode);
-            console.log("Response = " + r.response);
-            console.log("Sent = " + r.bytesSent);
-        }
-
-        function fail(error) {
-            alert("An error has occurred: Code = " + error.code);
-            console.log("upload error source " + error.source);
-            console.log("upload error target " + error.target);
-        }
-
         $('#recipe-creation-form').submit(function(event) {
 
             // Lock and prevent the default form from actually submitting.
@@ -220,6 +180,7 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
+                    CHEFSHUB.recipeConvertPhotoURLToImageField();
                     if (response['success']) {
                         noty({
                             text: 'Recipe has been successfully added! <br>Please wait... You are being redirected to the main page.',
