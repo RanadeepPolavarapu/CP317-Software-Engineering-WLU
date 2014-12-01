@@ -64,7 +64,9 @@
             <a href="index.html" data-theme="b"><i class="signup icon"></i>Sign In</a>
         </div>
         <div data-role="content">
-        	<center><h3>Login</h3></center>
+            <center>
+                <h3>Login</h3>
+            </center>
             <form id="user-login-form" class="ui-body ui-body-a ui-corner-all" data-ajax="false" method="post" action="http://cp317.ff.gg/api/auth/user/login.json">
                 <fieldset>
                     <div data-role="fieldcontain">
@@ -96,34 +98,36 @@
     <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
-    $('#user-login-form').submit(function(event) {
+        $('#user-login-form').submit(function(event) {
 
-        // Lock and prevent the default form from actually submitting.
-        // Can also return false at the bottom of this function to emulate this however, this is more elegant and proper.
-        event.preventDefault();
+            // Lock and prevent the default form from actually submitting.
+            // Can also return false at the bottom of this function to emulate this however, this is more elegant and proper.
+            event.preventDefault();
 
-        // base URL where we will be making HTTP requests to.
-        var baseURL = "http://cp317.ff.gg/api/auth/user/login.json";
+            // base URL where we will be making HTTP requests to.
+            var baseURL = "http://cp317.ff.gg/api/auth/user/login.json";
 
-        $.ajax({
-            type: "POST", // Make a GET request.
-            url: baseURL,
-            data: $("#user-login-form").serialize(), // serializes the postal code form's elements.
-            success: function(response) {
-            	if (response['success']) {
-            		// Successful Login
-            		CHEFSHUB.User.authentication.loggedIn = true;
-            		CHEFSHUB.User.authentication.username = response['data']['username'];
-            		CHEFSHUB.User.authentication.authenticated = true;
-            		CHEFSHUB.User.userLoginSuccess();
-            	}
-            	else {
-            		// Login failed
-            		alert("Login failed: " + response['errormsg']);
-                }
-            },
+            $.ajax({
+                type: "POST", // Make a GET request.
+                url: baseURL,
+                data: $("#user-login-form").serialize(), // serializes the postal code form's elements.
+                success: function(response) {
+                    if (response['success']) {
+                        // Successful Login
+                        CHEFSHUB.User.authentication.loggedIn = true;
+                        CHEFSHUB.User.authentication.username = response['data']['username'];
+                        CHEFSHUB.User.authentication.authenticated = true;
+                        CHEFSHUB.User.userLoginSuccess();
+                        setTimeout(function() {
+                            window.location.replace("index.html");
+                        }, 3000);
+                    } else {
+                        // Login failed
+                        CHEFSHUB.User.userLoginFailure(response['errormsg']);
+                    }
+                },
+            });
         });
-    });
     </script>
 </body>
 
