@@ -9,5 +9,6 @@
     </author>
     <content src="index.html" />
     <content src="login-or-register.html" />
+    <content src="search-results.html" />
     <access origin="*" />
 </widget>

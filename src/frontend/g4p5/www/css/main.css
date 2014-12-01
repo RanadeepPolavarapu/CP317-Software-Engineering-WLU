@@ -51,6 +51,10 @@ html, body {
 .ui-listview {
     margin: 0 !important;
 }
+
+.ui-filter-inset {
+    margin-top: 0;
+}
  
 .example-wrapper, .example-wrapper div.iscroll-scroller {
     width: 100% !important;

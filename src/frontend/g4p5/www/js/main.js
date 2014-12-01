@@ -114,17 +114,16 @@ var CHEFSHUB = {
         },
 
         userAuthenticationCheck: function() {
-        	var isAuthenticatedURLRoute = 'http://cp317.ff.gg/api/auth/user/is_authenticated.json';
+            var isAuthenticatedURLRoute = 'http://cp317.ff.gg/api/auth/user/is_authenticated.json';
 
-        	$.ajax({
+            $.ajax({
                 type: "GET", // Make a GET request.
                 url: isAuthenticatedURLRoute,
                 success: function(response) {
                     if (response['success']) {
                         $("#verified-user").append('<h4><u>User Verified</u></h4> <p>Logged in as: ' + response['data']['user_data']['username'] + '.');
-                    }
-                    else {
-                    	$("#verified-user").append('<h5>User not logged in. <br>Please sign in.</h5>');
+                    } else {
+                        $("#verified-user").append('<h5>User not logged in. <br>Please sign in.</h5>');
                     }
                 },
             });
@@ -134,6 +133,44 @@ var CHEFSHUB = {
     searchRecipe: function() {
         // Fill recipe-list with recipes matching search result
         // Fill recipe-data with recipe selected
+        $(function() {
+            $('#recipe-search-form').submit(function(event) {
+
+                // Lock and prevent the default form from actually submitting.
+                // Can also return false at the bottom of this function to emulate this however, this is more elegant and proper.
+                event.preventDefault();
+
+                // base URL where we will be making HTTP requests to.
+                var searchURLRoute = "http://cp317.ff.gg/api/recipe/search.json";
+                // var postalCodeSearched = $("input[name='zip']").val();
+
+                $.ajax({
+                    type: "POST", // Make a POST request as GET is limited for big data.
+                    url: searchURLRoute,
+                    data: $("#recipe-search-form").serialize(), // serializes the recipe search form's elements.
+                    success: function(response) {
+                        console.log(response); // Display the response in an alert.
+                    },
+                });
+            });
+        });
+    },
+
+    getChefsHubStatistics: function() {
+        var statisticsURLRoute = 'http://cp317.ff.gg/api/recipe/statistics.json';
+        console.log(statisticsURLRoute);
+
+        $.ajax({
+            type: "GET", // Make a GET request.
+            url: statisticsURLRoute,
+            success: function(response) {
+                if (response['success']) {
+                    $("#chefshub-statistics").append('<h5><u>ChefsHub Statistics</u></h5>Users: ' + response['data']['User'] + '. <br>Total Recipes: ' + response['data']['Recipe'] + '.');
+                } else {
+                    $("#chefshub-statistics").append('<h5>Error fetching statistics.</h5>');
+                }
+            },
+        });
     },
 
     indexPageFetchDataByCreateTime: function() {
@@ -170,8 +207,6 @@ var CHEFSHUB = {
                     $('#recipe-data').append('<li>Difficulty: ' + row.difficulty + '/5' + '</li>');
                     $('#recipe-data').append('<li>Cuisine Type: ' + row.cuisine_type + '</li>');
 
-
-                    //             $('#recipe-data').append('<li>Popularity : '+row.vote_average+'</li>');             
                     $('#recipe-data').listview('refresh');
                 }
             });
