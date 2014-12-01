@@ -66,20 +66,6 @@ var CHEFSHUB = {
             });
         },
 
-        userRegisterSuccess: function() {
-            noty({
-                text: 'Successfully registered! You are now being logged in to our system.',
-                type: 'success',
-                timeout: true,
-                animation: {
-                    open: 'animated bounceInLeft', // Animate.css class names
-                    close: 'animated bounceOutLeft', // Animate.css class names
-                    easing: 'swing', // unavailable - no need
-                    speed: 500 // unavailable - no need
-                }
-            });
-        },
-
         userLoginSuccess: function() {
             if (!Modernizr.localstorage)
                 return;
@@ -112,14 +98,42 @@ var CHEFSHUB = {
                 }
             });
         },
+
+        userRegisterSuccess: function() {
+            noty({
+                text: 'Successfully registered! You are now being logged in to our system.',
+                type: 'success',
+                timeout: true,
+                animation: {
+                    open: 'animated bounceInLeft', // Animate.css class names
+                    close: 'animated bounceOutLeft', // Animate.css class names
+                    easing: 'swing', // unavailable - no need
+                    speed: 500 // unavailable - no need
+                }
+            });
+        },
+
+        userAuthenticationCheck: function() {
+        	var isAuthenticatedURLRoute = 'http://cp317.ff.gg/api/auth/user/is_authenticated.json';
+
+        	$.ajax({
+                type: "GET", // Make a GET request.
+                url: isAuthenticatedURLRoute,
+                success: function(response) {
+                    if (response['success']) {
+                        console.log(response);
+                    }
+                },
+            });
+        }
     },
 
     searchRecipe: function() {
-		// Fill recipe-list with recipes matching search result
-		// Fill recipe-data with recipe selected
-		}
+        // Fill recipe-list with recipes matching search result
+        // Fill recipe-data with recipe selected
+    },
 
-    indexPageFetchDataByCTIME: function() {
+    indexPageFetchDataByCreateTime: function() {
         $(document).on('pageinit', '#home', function() {
             var url = 'http://cp317.ff.gg/api/recipe/get_recent.json/';
 
