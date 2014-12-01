@@ -121,7 +121,10 @@ var CHEFSHUB = {
                 url: isAuthenticatedURLRoute,
                 success: function(response) {
                     if (response['success']) {
-                        console.log(response);
+                        $("#verified-user").append('<h4><u>User Verified</u></h4> <p>Logged in as: ' + response['data']['user_data']['username'] + '.');
+                    }
+                    else {
+                    	$("#verified-user").append('<h5>User not logged in. <br>Please sign in.</h5>');
                     }
                 },
             });
