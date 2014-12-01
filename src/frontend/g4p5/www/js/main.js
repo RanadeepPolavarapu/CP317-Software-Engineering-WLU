@@ -158,8 +158,7 @@ var CHEFSHUB = {
 
     getChefsHubStatistics: function() {
         var statisticsURLRoute = 'http://cp317.ff.gg/api/recipe/statistics.json';
-        console.log(statisticsURLRoute);
-
+        
         $.ajax({
             type: "GET", // Make a GET request.
             url: statisticsURLRoute,

@@ -74,12 +74,18 @@
         <div data-role="panel" id="left-panel" data-theme="b">
             <div class="ui-panel-inner">
                 <div id="verified-user">
-                
+
                 </div>
-                
+
                 <div id="chefshub-statistics">
-                
+
                 </div>
+                <div id="left-panel-navigation">
+                    <hr>
+                    <a href="#" onclick="window.location.replace('search-results.html');" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="search" data-iconpos="right">Search Page</a>
+                    <hr>
+                </div>
+
                 <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
             </div>
         </div>
@@ -113,7 +119,7 @@
 
     <script type="text/javascript">
         CHEFSHUB.indexPageFetchDataByCreateTime();
-		CHEFSHUB.getChefsHubStatistics();
+        CHEFSHUB.getChefsHubStatistics();
         CHEFSHUB.User.userAuthenticationCheck();
     </script>
 </body>
