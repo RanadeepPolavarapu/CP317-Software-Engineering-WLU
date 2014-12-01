@@ -38,6 +38,7 @@ $.noty.defaults = {
     buttons: false // an array of buttons
 };
 
+// JavaScript & HTML utilities. Ex: String escaping HTML for JS compatibility.
 var Utilities = {
     entityMap: {
         "&": "&amp;",
