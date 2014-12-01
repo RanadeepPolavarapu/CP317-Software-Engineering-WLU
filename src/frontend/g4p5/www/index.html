@@ -122,6 +122,12 @@
     <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
+        $(document).ready(function() {
+            $('.like-button').click(function() {
+                alert('liek clicked');
+            });
+        });
+        
         CHEFSHUB.indexPageFetchDataByCreateTime();
         CHEFSHUB.getChefsHubStatistics();
         CHEFSHUB.User.userAuthenticationCheck();

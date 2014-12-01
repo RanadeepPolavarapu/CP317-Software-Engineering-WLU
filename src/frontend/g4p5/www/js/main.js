@@ -302,6 +302,12 @@ var CHEFSHUB = {
                 async: true,
                 success: function(result) {
                     ajax.recipeParseJSON(result);
+
+                    // Bind click event to like buttons.
+                    $('.like-button').click(function() {
+                        alert('like clicked' + $(this).attr('data-id'));
+                        $(this).attr('disabled','disabled');
+                    });
                 },
                 error: function(request, error) {
                     alert('Error: We were unable to fetch the data. A network error has occurred please try again!');
@@ -348,7 +354,7 @@ var CHEFSHUB = {
             recipeParseJSON: function(result) {
                 recipeInfo.result = result['data'];
                 $.each(result['data'], function(i, row) {
-                    $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a> <p class="like-button"><button>Like Recipe</button></p></li>');
+                    $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a> <p class="like-button-padding"><button class="like-button" data-id="' + row.id + '">Like Recipe</button></p></li>');
                 });
                 $('#recipe-list').listview('refresh');
             }
