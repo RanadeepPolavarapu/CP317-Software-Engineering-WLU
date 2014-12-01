@@ -6,6 +6,21 @@ $(function() {
 
 
 var CHEFSHUB = {
+	User: {
+		authentication: {
+			loggedIn: false,
+			username: null,
+			authenticated: false,
+		},
+
+		userLoginSuccess: function() {
+			if (!Modernizr.localstorage)
+				return;
+
+			localStorage.setItem("User.authentication", JSON.stringify(CHEFSHUB.User.authentication));
+		},
+	},
+
 	indexPageFetchDataByCTIME: function() {
 		$(document).on('pageinit', '#home', function() {
             var url = 'http://cp317.ff.gg/api/recipe/get_recent.json/';

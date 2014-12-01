@@ -1,3 +1,39 @@
+html, body {
+    height: 100% !important;
+}
+
+.global-wrapper {
+    position: relative;
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.sticky-footer {
+    min-width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin: 0 auto 0 auto;
+    z-index: 5;
+}
+
+.header-self-image-thumbnail {
+    height: 5%;
+    width: 5%;
+    margin: auto;
+    position: relative;
+    bottom: 0;
+    top: 0;
+}
+
+.centered {
+    text-align: center;
+}
+
 .listview-image-centered {
     /* Absolute centered with left justified. Square images will auto scale but this is for non-square images. */
     margin: auto; 

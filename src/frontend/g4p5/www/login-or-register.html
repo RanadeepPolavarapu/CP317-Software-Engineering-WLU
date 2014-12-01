@@ -52,40 +52,38 @@
     <script type="text/javascript" src="js/vendor/jquery-2.1.1/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.js"></script>
     <script type="text/javascript" src="dist/semantic.min.js"></script>
-    
-    <title>g4p5 - ChefsHub Home Page</title>
+
+    <title>g4p5 - ChefsHub Login Page</title>
 </head>
 
 <body>
     <div data-role="page" id="home">
         <div data-theme="b" data-role="header">
-        	<a href="index.html" data-icon="delete" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Cancel</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
-            <h3>ChefsHub - Recent Recipes</h3>
-       		<a href="index.html" data-theme="b"><i class="signup icon"></i>Sign In</a>
+            <a href="index.html" data-icon="delete" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Cancel</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h3>ChefsHub - Login</h3>
+            <a href="index.html" data-theme="b"><i class="signup icon"></i>Sign In</a>
         </div>
         <div data-role="content">
-            <div class="example-wrapper" data-iscroll>
-                <ul data-role="listview" id="recipe-list" data-theme="a">
-
-                </ul>
-            </div>
+        	<center><h3>Login</h3></center>
+            <form id="user-login-form" class="ui-body ui-body-a ui-corner-all" data-ajax="false" method="post" action="http://cp317.ff.gg/api/auth/user/login.json">
+                <fieldset>
+                    <div data-role="fieldcontain">
+                        <label for="username">Username:</label>
+                        <input type="text" value="" name="username" id="username" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="password">Password:</label>
+                        <input type="password" value="" name="password" id="password" />
+                    </div>
+                    <input type="submit" data-theme="b" name="submit" id="submit" value="Submit">
+                </fieldset>
+            </form>
+            <hr>
+            <center>OR</center>
+            <hr>
         </div>
         <div class="ui-btn-active ui-state-persist sticky-footer" data-position="fixed" data-role="footer" data-theme="b">
             <h1>Copyright © 2014 ChefsHub. All rights reserved.</h1>
-        </div>
-    </div>
-
-    <div data-role="page" id="headline">
-        <div data-theme="b" data-role="header">
-            <a href="#home" class="ui-btn-left" data-transition="slide" data-direction="reverse">Back</a>
-            <h3>
-            Recipe Info
-        </h3>
-        </div>
-        <div data-role="content">
-            <ul data-role="listview" id="recipe-data" data-theme="a">
-
-            </ul>
         </div>
     </div>
 
@@ -98,7 +96,34 @@
     <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
-    	CHEFSHUB.indexPageFetchDataByCTIME();
+    $('#user-login-form').submit(function(event) {
+
+        // Lock and prevent the default form from actually submitting.
+        // Can also return false at the bottom of this function to emulate this however, this is more elegant and proper.
+        event.preventDefault();
+
+        // base URL where we will be making HTTP requests to.
+        var baseURL = "http://cp317.ff.gg/api/auth/user/login.json";
+
+        $.ajax({
+            type: "POST", // Make a GET request.
+            url: baseURL,
+            data: $("#user-login-form").serialize(), // serializes the postal code form's elements.
+            success: function(response) {
+            	if (response['success']) {
+            		// Successful Login
+            		CHEFSHUB.User.authentication.loggedIn = true;
+            		CHEFSHUB.User.authentication.username = response['data']['username'];
+            		CHEFSHUB.User.authentication.authenticated = true;
+            		CHEFSHUB.User.userLoginSuccess();
+            	}
+            	else {
+            		// Login failed
+            		alert("Login failed: " + response['errormsg']);
+                }
+            },
+        });
+    });
     </script>
 </body>
 
