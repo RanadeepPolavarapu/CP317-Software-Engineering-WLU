@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from api.models import *
@@ -116,7 +116,12 @@ def ajax_auth_is_authenticated(request):
 			result[field.name] = field.value_from_object(request.user)
 		return JsonResponse( {'success': True, 'data': {'is_authenticated': True, 'user_data': result}} , safe=False)
 	else:
-		return JsonResponse( {'success': True, 'data': {'is_authenticated': False}} , safe=False)
+		return JsonResponse( {'success': False, 'data': {'is_authenticated': False}} , safe=False)
+
+@csrf_exempt
+def ajax_auth_logout(request):
+	logout(request)
+	return JsonResponse( {'success': False, 'data': {'is_authenticated': False}} , safe=False)
 
 @csrf_exempt
 def ajax_get_recent_recipes(request):
@@ -130,3 +135,41 @@ def ajax_get_recent_recipes(request):
 		result['photo'] = str(result['photo'])
 		data['data'].append(result)
 	return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def ajax_search_recipes(request):
+	if request.method == 'POST':
+		search_query = request.POST.get('q', '').strip()
+		list = Recipe.objects.filter(recipe_name__icontains=search_query)
+		data = {'success': True, 'data': []}
+		for item in list:
+			result = {}
+			for field in item._meta.fields:
+				result[field.name] = field.value_from_object(item)
+			result['owner'] = User.objects.get(pk=int(result['user'])).username
+			result['photo'] = str(result['photo'])
+			data['data'].append(result)
+		return JsonResponse(data, safe=False)
+	elif request.method == 'GET':
+		search_query = request.GET.get('q', '').strip()
+		list = Recipe.objects.filter(recipe_name__icontains=search_query)
+		data = {'success': True, 'data': []}
+		for item in list:
+			result = {}
+			for field in item._meta.fields:
+				result[field.name] = field.value_from_object(item)
+			result['owner'] = User.objects.get(pk=int(result['user'])).username
+			result['photo'] = str(result['photo'])
+			data['data'].append(result)
+		return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def ajax_get_statistics(request):
+	total_recipes = Recipe.objects.count()
+	total_users = User.objects.count()
+	total_chusers = CHUser.objects.count()
+	data = {'success': True, 'data': {}}
+	data['data'] = {'Recipe': total_recipes, 'CHUser': total_chusers, 'User': total_users}
+	return JsonResponse(data, safe=False)
+
+
