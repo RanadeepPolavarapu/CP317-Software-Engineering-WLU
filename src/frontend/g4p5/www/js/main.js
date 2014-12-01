@@ -77,6 +77,11 @@ var CHEFSHUB = {
         },
     },
 
+    searchRecipe: function() {
+		// Fill recipe-list with recipes matching search result
+		// Fill recipe-data with recipe selected
+		}
+
     indexPageFetchDataByCTIME: function() {
         $(document).on('pageinit', '#home', function() {
             var url = 'http://cp317.ff.gg/api/recipe/get_recent.json/';
