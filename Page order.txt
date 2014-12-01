@@ -1,6 +1,6 @@
-1) Main Page With most recent recipes, sign in button, sort by filters.
-2) After sign in user profile page. has create recipe, that shows list of recent recipes and option to list by liked recipe.
-3) Create a recipe.
-4) Search result page.
-5) Displaying Recipe.
+1) Main Page With most recent recipes, sign in button, sort by filters. - Done
+2) After sign in user profile page. has create recipe, that shows list of recent recipes and option to list by liked recipe. - Done
+3) Create a recipe. - Done
+4) Search result page. - Done
+5) Displaying Recipe. - Done
 6) Admin page

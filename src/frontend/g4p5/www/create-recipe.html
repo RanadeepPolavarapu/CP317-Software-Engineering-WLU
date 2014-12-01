@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<!-- 
+    ===============================================================
+    Title: create-recipe.html
+    Project: Final Project Implementation (P5)
+    Date: Tuesday, Dec. 1, 2014
+    Written for: CP317-A
+    Authors: (Group #4)
+        Ranadeep Polavarapu - (120443120) - (pola3120@mylaurier.ca)
+        Bruno Salapic - (100574460) - (sala4460@mylaurier.ca)
+        Lee Glendenning - (120289190) - (glen9190@mylaurier.ca)
+        Ryan Burke - (120543180) - (burk3180@mylaurier.ca)
+    ===============================================================
+ -->
+<html>
+
+<head>
+    <!-- META tags -->
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <!-- CSS links -->
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="dist/semantic.min.css" />
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="css/animate.css" />
+
+
+    <!-- JS links -->
+    <script type="text/javascript" src="js/vendor/jquery-2.1.1/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script type="text/javascript" src="dist/semantic.min.js"></script>
+
+    <title>g4p5 - ChefsHub Create a Recipe</title>
+</head>
+
+<body>
+    <div data-role="page" id="home">
+        <div data-theme="b" data-role="header" id="jqm-chefshub-header">
+            <a onclick="window.location.replace('index.html');" data-icon="arrow-l" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Go Back</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h3>ChefsHub - Create Recipe</h3>
+            <a href="index.html" data-theme="b"><i class="signup icon"></i>Sign In</a>
+        </div>
+        <div data-role="content">
+            <center>
+                <h3>Create Recipe</h3>
+            </center>
+            <form id="recipe-creation-form" class="ui-body ui-body-a ui-corner-all" data-ajax="true" method="post" action="http://cp317.ff.gg/api/recipe/create_recipe.json" enctype="multipart/form-data" action="javascript:;" accept-charset="utf-8">
+                <fieldset>
+                    <div data-role="fieldcontain">
+                        <label for="username">Recipe Name:</label>
+                        <input type="text" value="" name="recipe_name" id="recipe_name" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="username">Image:</label>
+                        <input type="file" value="" name="photo" id="photo" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="description">Description:</label>
+                        <textarea cols="40" rows="8" name="description" id="description"></textarea>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="ingredients">Ingredients:</label>
+                        <textarea cols="40" rows="8" name="ingredients" id="ingredients"></textarea>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="directions">Directions:</label>
+                        <textarea cols="40" rows="8" name="directions" id="directions"></textarea>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="prep_time">Prep Time:</label>
+                        <input type="text" value="" name="prep_time" id="prep_time" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="cook_time">Cooking Time:</label>
+                        <input type="text" value="" name="cook_time" id="cook_time" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="serving_value">Serving Value (people):</label>
+                        <input type="number" data-type="range" name="serving_value" id="serving_value" value="1" min="1" max="20" data-track-theme="b" data-theme="b" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset ui-slider-input" aria-disabled="false">
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="slider" id="slider-label">Rating (out of 5):</label>
+                        <input type="number" data-type="range" name="rating" id="rating" value="1" min="1" max="5" data-track-theme="b" data-theme="b" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset ui-slider-input" aria-disabled="false">
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="slider" id="slider-label">Difficulty (out of 5):</label>
+                        <input type="number" data-type="range" name="difficulty" id="difficulty" value="1" min="1" max="5" data-track-theme="b" data-theme="b" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset ui-slider-input" aria-disabled="false">
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="cuisine_type">Cuisine Type:</label>
+                        <input type="text" value="" name="cuisine_type" id="cuisine_type" />
+                    </div>
+                    <input type="submit" data-theme="b" name="submit" id="submit" value="Create">
+                </fieldset>
+            </form>
+        </div>
+        <div class="ui-btn-active ui-state-persist sticky-footer" data-position="fixed" data-role="footer" data-theme="b">
+            <h1>Copyright © 2014 ChefsHub. All rights reserved.</h1>
+        </div>
+    </div>
+
+    <!-- Supplemental JS linked at the bottom to be non-blocking. Placing these in head will slow down page loads and is never recommended. -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-utility.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            var isAuthenticatedURLRoute = 'http://cp317.ff.gg/api/auth/user/is_authenticated.json';
+
+            $.ajax({
+                type: "GET", // Make a GET request.
+                url: isAuthenticatedURLRoute,
+                success: function(response) {
+                    if (!response['success']) {
+                        noty({
+                            text: '<span style="color: #000;"> You are not authorized to be on this page. Please login first. <br>Please wait... You are being redirected to the main page. </span>',
+                            type: 'error',
+                            timeout: true,
+                            animation: {
+                                open: 'animated bounceInLeft', // Animate.css class names
+                                close: 'animated bounceOutLeft', // Animate.css class names
+                                easing: 'swing', // unavailable - no need
+                                speed: 500 // unavailable - no need
+                            }
+                        });
+                        setTimeout(function() {
+                            window.location.replace("index.html");
+                        }, 2000);
+                    }
+                },
+            });
+        })
+
+
+        $('#recipe-creation-form').submit(function(event) {
+
+            // Lock and prevent the default form from actually submitting.
+            // Can also return false at the bottom of this function to emulate this however, this is more elegant and proper.
+            event.preventDefault();
+
+            // base URL where we will be making HTTP requests to.
+            var recipeCreationURLRoute = "http://cp317.ff.gg/api/recipe/create_recipe.json";
+
+            $.ajax({
+                type: "POST", // Make a GET request.
+                url: recipeCreationURLRoute,
+                data: new FormData(this), // serializes the register form's elements. This is special because it handles file upload.
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response['success']) {
+                        noty({
+                            text: 'Recipe has been successfully added! <br>Please wait... You are being redirected to the main page.',
+                            type: 'success',
+                            timeout: true,
+                            animation: {
+                                open: 'animated bounceInLeft', // Animate.css class names
+                                close: 'animated bounceOutLeft', // Animate.css class names
+                                easing: 'swing', // unavailable - no need
+                                speed: 500 // unavailable - no need
+                            }
+                        });
+                        setTimeout(function() {
+                            window.location.replace("index.html");
+                        }, 3000);
+                    } else {
+                        alert("Failure. Something went wrong.");
+                    }
+                },
+            });
+        });
+    </script>
+</body>
+
+</html>
