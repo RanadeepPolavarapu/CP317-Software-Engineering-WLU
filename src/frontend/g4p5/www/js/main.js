@@ -13,8 +13,12 @@ $.noty.defaults = {
     dismissQueue: true, // If you want to use queue feature set this true
     template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
     animation: {
-        open: {height: 'toggle'}, // or Animate.css class names like: 'animated bounceInLeft'
-        close: {height: 'toggle'}, // or Animate.css class names like: 'animated bounceOutLeft'
+        open: {
+            height: 'toggle'
+        }, // or Animate.css class names like: 'animated bounceInLeft'
+        close: {
+            height: 'toggle'
+        }, // or Animate.css class names like: 'animated bounceOutLeft'
         easing: 'swing',
         speed: 500 // opening & closing animation speed
     },
@@ -34,13 +38,46 @@ $.noty.defaults = {
     buttons: false // an array of buttons
 };
 
-
+// ChefsHub global namespace.
 var CHEFSHUB = {
     User: {
         authentication: {
             loggedIn: false,
             username: null,
             authenticated: false,
+        },
+
+        userLogin: function(loginURLRoute, username, password) {
+            var jsonLoginData = {
+                username: username,
+                password: password
+            };
+
+            $.ajax({
+                type: "POST", // Make a GET request.
+                url: loginURLRoute,
+                data: jsonLoginData,
+                success: function(response) {
+                    if (response['error']) {
+                        CHEFSHUB.User.userLoginFailure(response['errormsg']);
+                    }
+                    // Do not do anything on success. Success is handled by HTML page inline script.
+                },
+            });
+        },
+
+        userRegisterSuccess: function() {
+            noty({
+                text: 'Successfully registered! You are now being logged in to our system.',
+                type: 'success',
+                timeout: true,
+                animation: {
+                    open: 'animated bounceInLeft', // Animate.css class names
+                    close: 'animated bounceOutLeft', // Animate.css class names
+                    easing: 'swing', // unavailable - no need
+                    speed: 500 // unavailable - no need
+                }
+            });
         },
 
         userLoginSuccess: function() {
@@ -50,7 +87,7 @@ var CHEFSHUB = {
             localStorage.setItem("User.authentication", JSON.stringify(CHEFSHUB.User.authentication));
 
             noty({
-                text: 'Successfully logged in as ' + CHEFSHUB.User.authentication.username + '!',
+                text: 'Successfully logged in as ' + CHEFSHUB.User.authentication.username + '! <p>Please wait...you will be redirected to the main page.',
                 type: 'success',
                 timeout: true,
                 animation: {
@@ -63,7 +100,7 @@ var CHEFSHUB = {
         },
 
         userLoginFailure: function(errorMessage) {
-        	noty({
+            noty({
                 text: '<span style="color: #000;"> Login Failed! <br>Error Message: ' + errorMessage + '</span>',
                 type: 'error',
                 timeout: true,

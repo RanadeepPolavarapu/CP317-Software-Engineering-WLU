@@ -19,7 +19,7 @@
 -->
 <!-- 
     ===============================================================
-    Title: index.html
+    Title: login-or-register.html
     Project: Final Project Implementation (P5)
     Date: Tuesday, Dec. 1, 2014
     Written for: CP317-A
@@ -59,30 +59,70 @@
 <body>
     <div data-role="page" id="home">
         <div data-theme="b" data-role="header">
-            <a href="index.html" data-icon="delete" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Cancel</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <a onclick="window.location.replace('index.html');" data-icon="arrow-l" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Go Back</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
             <h3>ChefsHub - Login</h3>
             <a href="index.html" data-theme="b"><i class="signup icon"></i>Sign In</a>
         </div>
         <div data-role="content">
-            <center>
-                <h3>Login</h3>
-            </center>
-            <form id="user-login-form" class="ui-body ui-body-a ui-corner-all" data-ajax="false" method="post" action="http://cp317.ff.gg/api/auth/user/login.json">
-                <fieldset>
-                    <div data-role="fieldcontain">
-                        <label for="username">Username:</label>
-                        <input type="text" value="" name="username" id="username" />
-                    </div>
-                    <div data-role="fieldcontain">
-                        <label for="password">Password:</label>
-                        <input type="password" value="" name="password" id="password" />
-                    </div>
-                    <input type="submit" data-theme="b" name="submit" id="submit" value="Submit">
-                </fieldset>
-            </form>
-            <hr>
-            <center>OR</center>
-            <hr>
+            <div data-role="tabs" id="tabs">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#one" data-ajax="false">Login</a>
+                        </li>
+                        <li><a href="#two" data-ajax="false">Register</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="one" class="ui-body-d ui-content">
+                    <center>
+                        <h3>Login</h3>
+                    </center>
+                    <form id="user-login-form" class="ui-body ui-body-a ui-corner-all" data-ajax="true" method="post" action="http://cp317.ff.gg/api/auth/user/login.json">
+                        <fieldset>
+                            <div data-role="fieldcontain">
+                                <label for="username">Username:</label>
+                                <input type="text" value="" name="username" id="username" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="password">Password:</label>
+                                <input type="password" value="" name="password" id="password" />
+                            </div>
+                            <input type="submit" data-theme="b" name="submit" id="submit" value="Login">
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="two">
+                    <center>
+                        <h3>Registration</h3>
+                    </center>
+                    <form id="user-register-form" class="ui-body ui-body-a ui-corner-all" data-ajax="true" method="post" action="http://cp317.ff.gg/api/auth/user/register.json">
+                        <label>We will automatically log you in after you register.</label>
+                        <fieldset>
+                            <div data-role="fieldcontain">
+                                <label for="username">Username:</label>
+                                <input type="text" value="" name="username" id="username" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="password">Password:</label>
+                                <input type="password" value="" name="password" id="password" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="email">Email:</label>
+                                <input type="email" value="" name="email" id="email" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="first_name">First Name:</label>
+                                <input type="first_name" value="" name="first_name" id="first_name" />
+                            </div>
+                            <div data-role="fieldcontain">
+                                <label for="last_name">Last Name:</label>
+                                <input type="last_name" value="" name="last_name" id="last_name" />
+                            </div>
+                            <input type="submit" data-theme="b" name="submit" id="submit" value="Sign Up">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="ui-btn-active ui-state-persist sticky-footer" data-position="fixed" data-role="footer" data-theme="b">
             <h1>Copyright © 2014 ChefsHub. All rights reserved.</h1>
@@ -110,10 +150,46 @@
             $.ajax({
                 type: "POST", // Make a GET request.
                 url: baseURL,
-                data: $("#user-login-form").serialize(), // serializes the postal code form's elements.
+                data: $("#user-login-form").serialize(), // serializes the login form's elements.
                 success: function(response) {
                     if (response['success']) {
                         // Successful Login
+                        CHEFSHUB.User.authentication.loggedIn = true;
+                        CHEFSHUB.User.authentication.username = response['data']['username'];
+                        CHEFSHUB.User.authentication.authenticated = true;
+                        CHEFSHUB.User.userLoginSuccess();
+                        setTimeout(function() {
+                            window.location.replace("index.html");
+                        }, 3000);
+                    } else {
+                        // Login failed
+                        CHEFSHUB.User.userLoginFailure(response['errormsg']);
+                    }
+                },
+            });
+        });
+
+        $('#user-register-form').submit(function(event) {
+
+            // Lock and prevent the default form from actually submitting.
+            // Can also return false at the bottom of this function to emulate this however, this is more elegant and proper.
+            event.preventDefault();
+
+            // base URL where we will be making HTTP requests to.
+            var loginURL = "http://cp317.ff.gg/api/auth/user/login.json";
+            var registerURL = "http://cp317.ff.gg/api/auth/user/register.json";
+            var username = $("#user-register-form input[name='username']").val();
+            var password = $("#user-register-form input[name='password']").val();
+
+            $.ajax({
+                type: "POST", // Make a GET request.
+                url: registerURL,
+                data: $("#user-register-form").serialize(), // serializes the register form's elements.
+                success: function(response) {
+                    if (response['success']) {
+                        // Successful Registration
+                        CHEFSHUB.User.userRegisterSuccess();
+                        CHEFSHUB.User.userLogin(loginURL, username, password);
                         CHEFSHUB.User.authentication.loggedIn = true;
                         CHEFSHUB.User.authentication.username = response['data']['username'];
                         CHEFSHUB.User.authentication.authenticated = true;
