@@ -7,8 +7,8 @@
     <author href="http://wlu.ca">
         CP317 - Group 4
     </author>
-    <content src="index.html" />
-    <content src="login-or-register.html" />
     <content src="search-results.html" />
+    <content src="login-or-register.html" />
+    <content src="index.html" />
     <access origin="*" />
 </widget>

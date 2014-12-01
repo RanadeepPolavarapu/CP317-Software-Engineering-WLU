@@ -1,0 +1,3 @@
+# view AndroidManifest.xml #generated:11
+-keep class ca.wlu.g4p5.CordovaApp { <init>(...); }
+

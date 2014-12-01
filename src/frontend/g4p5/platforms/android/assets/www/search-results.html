@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<!-- 
+    ===============================================================
+    Title: search-results.html
+    Project: Final Project Implementation (P5)
+    Date: Tuesday, Dec. 1, 2014
+    Written for: CP317-A
+    Authors: (Group #4)
+        Ranadeep Polavarapu - (120443120) - (pola3120@mylaurier.ca)
+        Bruno Salapic - (100574460) - (sala4460@mylaurier.ca)
+        Lee Glendenning - (120289190) - (glen9190@mylaurier.ca)
+        Ryan Burke - (120543180) - (burk3180@mylaurier.ca)
+    ===============================================================
+ -->
+<html>
+
+<head>
+    <!-- META tags -->
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <!-- CSS links -->
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="dist/semantic.min.css" />
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="css/animate.css" />
+
+
+    <!-- JS links -->
+    <script type="text/javascript" src="js/vendor/jquery-2.1.1/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.mobile-1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <script type="text/javascript" src="dist/semantic.min.js"></script>
+
+    <title>g4p5 - ChefsHub Search Page</title>
+</head>
+
+<body>
+    <div data-role="page" id="home">
+        <div data-theme="b" data-role="header">
+            <!--         	<a href="index.html" data-icon="delete" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Cancel</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a> -->
+            <a href="#left-panel" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-f" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="f" title="Menu"><span class="ui-btn-inner"><span class="ui-btn-text">Menu</span><span class="ui-icon ui-icon-bars ui-icon-shadow">&nbsp;</span></span></a>
+            <h3>ChefsHub - Search Recipes</h3>
+            <button onclick="window.location.replace('login-or-register.html');" data-theme="b" id="sign-in-button"><i class="signup icon"></i>Sign In</button>
+        </div>
+        <div data-role="content">
+            <form id="recipe-search-form" class="ui-body ui-body-a ui-corner-all" data-ajax="false" method="post" action="http://cp317.ff.gg/api/recipe/search.json">
+                <fieldset>
+                    <div data-role="fieldcontain">
+                        <input type="text" value="" name="q" id="search">
+                        <input type="submit" data-theme="b" name="submit" id="submit" value="Search" />
+                    </div>
+                </fieldset>
+            </form>
+            <div class="example-wrapper" data-iscroll>
+                <ul data-role="listview" id="recipe-list" data-theme="a">
+
+                </ul>
+            </div>
+        </div>
+        <div data-role="panel" id="left-panel" data-theme="b">
+            <div class="ui-panel-inner">
+                <div id="verified-user">
+                
+                </div>
+                
+                <div id="chefshub-statistics">
+                
+                </div>
+                
+                <div id="left-panel-navigation">
+                    <hr>
+                    <a href="#" onclick="window.location.replace('index.html');" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="home" data-iconpos="right">Home Page</a>
+                    <hr>
+                </div>
+                
+                <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
+            </div>
+        </div>
+        <!-- /panel -->
+        <div class="ui-btn-active ui-state-persist sticky-footer" data-position="fixed" data-role="footer" data-theme="b">
+            <h1>Copyright © 2014 ChefsHub. All rights reserved.</h1>
+        </div>
+    </div>
+
+    <!-- Supplemental JS linked at the bottom to be non-blocking. Placing these in head will slow down page loads and is never recommended. -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/vendor/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-utility.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+    	CHEFSHUB.User.userAuthenticationCheck();
+		CHEFSHUB.getChefsHubStatistics();
+        CHEFSHUB.searchRecipe();
+    </script>
+</body>
+
+</html>
