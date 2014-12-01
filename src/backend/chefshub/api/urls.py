@@ -13,6 +13,9 @@ urlpatterns = patterns('',
 
 	url(r'^recipe/get_recent.json/?$', views.ajax_get_recent_recipes),
 	url(r'^recipe/search.json/?$', views.ajax_search_recipes),
+	url(r'^recipe/create_recipe.json/?$', views.ajax_create_recipe),
+	url(r'^recipe/photourl_to_imagefield.json/?$', views.ajax_convert_photoURL_to_ImageField),
+
 	url(r'^recipe/statistics.json/?$', views.ajax_get_statistics),
 
 

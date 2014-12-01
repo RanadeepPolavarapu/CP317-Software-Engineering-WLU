@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.files import File
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from api.models import *
+
+import requests, urllib
 
 # Create your views here.
 
@@ -172,4 +175,68 @@ def ajax_get_statistics(request):
 	data['data'] = {'Recipe': total_recipes, 'CHUser': total_chusers, 'User': total_users}
 	return JsonResponse(data, safe=False)
 
+@csrf_exempt
+def ajax_create_recipe(request):
+	if request.method == 'POST' and request.user.is_authenticated():
+		data = {'success': True, 'data': {}}
 
+		recipe_name = request.POST.get('recipe_name', '').strip()
+		photo = request.FILES['photo'] if request.FILES else None
+		photo_url = request.POST.get('photo_url', '').strip()
+		description = request.POST.get('description', '').strip()
+		ingredients = request.POST.get('ingredients', '').strip()
+		directions = request.POST.get('directions', '').strip()
+		prep_time = request.POST.get('prep_time', '').strip()
+		cook_time = request.POST.get('cook_time', '').strip()
+		serving_value = request.POST.get('serving_value', '').strip()
+		rating = request.POST.get('rating', '').strip()
+		difficulty = request.POST.get('difficulty', '').strip()
+		cuisine_type = request.POST.get('cuisine_type', '').strip()
+		user = request.user
+		try:
+			recipe = Recipe(
+				recipe_name=recipe_name,
+				photo=photo,
+				photo_url=photo_url,
+				description=description,
+				ingredients=ingredients,
+				directions=directions,
+				prep_time=prep_time,
+				cook_time=cook_time,
+				serving_value=serving_value,
+				rating=rating,
+				difficulty=difficulty,
+				cuisine_type=cuisine_type,
+				user=user
+			)
+				
+			recipe.save()
+			
+			result = {}
+			for field in recipe._meta.fields:
+				result[field.name] = field.value_from_object(recipe)
+			result['photo'] = str(result['photo'])
+			data = {'success': True, 'data': result }
+		except Exception as e:
+			raise
+			data = {'success': False, 'error': True, 'errormsg': str(e) }
+		
+		return JsonResponse(data, safe=False)
+		
+	# Request method is not GET or POST but another HTTP method or one of username or password is missing
+	return JsonResponse( {'success': False, 'error': True, 'errormsg': 'Invalid HTTP Method or params are missing.'} , safe=False)
+
+@csrf_exempt
+def ajax_convert_photoURL_to_ImageField(request):
+	list = Recipe.objects.all().order_by('-id')[:100]
+	for recipe in list:
+		if recipe.photo_url is '' or recipe.photo:
+			continue
+			
+		photo_request = urllib.request.urlretrieve(recipe.photo_url)
+		recipe.photo.save(os.path.basename(recipe.photo_url), File(open(photo_request[0], 'rb')))
+		recipe.save()
+	data = {'success': True, 'data': {'photo_urls': 'Converted to ImageField'}}
+	return JsonResponse(data, safe=False)
+			
+	
