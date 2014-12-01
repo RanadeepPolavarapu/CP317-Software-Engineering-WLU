@@ -9,6 +9,9 @@ urlpatterns = patterns('',
 	url(r'^auth/user/login.json/?$', views.ajax_auth_login),
 	url(r'^auth/user/register.json/?$', views.ajax_auth_register),
 	url(r'^auth/user/is_authenticated.json/?$', views.ajax_auth_is_authenticated),
+	
+	url(r'^recipe/get_recent.json/?$', views.ajax_get_recent_recipes),
+
 #     url(r'^ajax/update.json/?$', views.ajax_update_official_api),
 # 	url(r'^ajax/register.json/?$', views.ajax_register_official_api),
 # 	# Debug purposes.

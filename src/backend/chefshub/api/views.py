@@ -75,7 +75,7 @@ def ajax_auth_register(request):
 			
 			result = {}
 			for field in user._meta.fields:
-				result[field.name] = field.value_to_string(user)
+				result[field.name] = field.value_from_object(user)
 			data = {'success': True, 'data': result }
 		except Exception as e:
 			data = {'success': False, 'error': True, 'errormsg': str(e) }
@@ -98,7 +98,7 @@ def ajax_auth_register(request):
 			
 			result = {}
 			for field in user._meta.fields:
-				result[field.name] = field.value_to_string(user)
+				result[field.name] = field.value_from_object(user)
 			data = {'success': True, 'data': result }
 		except Exception as e:
 			data = {'success': False, 'error': True, 'errormsg': str(e) }
@@ -111,11 +111,22 @@ def ajax_auth_register(request):
 @csrf_exempt
 def ajax_auth_is_authenticated(request):
 	if request.user.is_authenticated():
-		print(request.user.id)
 		result = {}
 		for field in request.user._meta.fields:
-			result[field.name] = field.value_to_string(request.user)
+			result[field.name] = field.value_from_object(request.user)
 		return JsonResponse( {'success': True, 'data': {'is_authenticated': True, 'user_data': result}} , safe=False)
 	else:
 		return JsonResponse( {'success': True, 'data': {'is_authenticated': False}} , safe=False)
 
+@csrf_exempt
+def ajax_get_recent_recipes(request):
+	list = Recipe.objects.all().order_by('-id')[:100]
+	data = {'success': True, 'data': []}
+	for item in list:
+		result = {}
+		for field in item._meta.fields:
+			result[field.name] = field.value_from_object(item)
+		result['owner'] = User.objects.get(pk=int(result['user'])).username
+		result['photo'] = str(result['photo'])
+		data['data'].append(result)
+	return JsonResponse(data, safe=False)
