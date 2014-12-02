@@ -197,14 +197,14 @@ var CHEFSHUB = {
             case "lowest-difficulty":
                 CHEFSHUB.sortByDifficulty();
                 break;
+            case "highest-serving":
+                CHEFSHUB.sortByHighestServingValue();
+                break;
             case "most-recent-date-added":
                 CHEFSHUB.sortByDateAdded();
                 break;
-            case "lowest-prep-time":
-                //Sort by prep time
-                break;
             case "highest-rating":
-                //Sort by prep time
+                CHEFSHUB.sortByHighestRating();
                 break;
             default:
                 // Null case. Case not found.
@@ -222,7 +222,7 @@ var CHEFSHUB = {
                 if (response['success']) {
                     $('#recipe-list').empty();
                     $.each(response.data, function(i, row) {
-                        $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p>Difficulty: ' + row.difficulty + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+                        $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class="ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p><b>Difficulty: ' + row.difficulty + '</b></p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
                         $('#recipe-list').listview('refresh');
                     });
                 }
@@ -240,7 +240,43 @@ var CHEFSHUB = {
                 if (response['success']) {
                     $('#recipe-list').empty();
                     $.each(response.data, function(i, row) {
-                        $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p>Difficulty: ' + row.difficulty + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+                        $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class="ui-li-desc"><b>Published: ' + jQuery.timeago(row.meta_date_created) + '</b></p><p>Difficulty: ' + row.difficulty + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+                        $('#recipe-list').listview('refresh');
+                    });
+                }
+            },
+        });
+    },
+
+    sortByHighestRating: function() {
+        var topRatedRecipeURLRoute = 'http://cp317.ff.gg/api/recipe/get_top_rated.json';
+
+        $.ajax({
+            type: "GET", // Make a GET request.
+            url: topRatedRecipeURLRoute,
+            success: function(response) {
+                if (response['success']) {
+                    $('#recipe-list').empty();
+                    $.each(response.data, function(i, row) {
+                        $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc"><b>Rating: ' + row.rating + '/5</b></p><p class="ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p>Difficulty: ' + row.difficulty + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+                        $('#recipe-list').listview('refresh');
+                    });
+                }
+            },
+        });
+    },
+
+    sortByHighestServingValue: function() {
+        var highestServingValueRecipesURLRoute = 'http://cp317.ff.gg/api/recipe/get_most_serving_value.json';
+
+        $.ajax({
+            type: "GET", // Make a GET request.
+            url: highestServingValueRecipesURLRoute,
+            success: function(response) {
+                if (response['success']) {
+                    $('#recipe-list').empty();
+                    $.each(response.data, function(i, row) {
+                        $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class="ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p>Difficulty: ' + row.difficulty + '</p><p class="ui-li-desc"><b>Serves: ' + row.serving_value + ' people</b></p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
                         $('#recipe-list').listview('refresh');
                     });
                 }
@@ -277,7 +313,7 @@ var CHEFSHUB = {
     searchRecipeFillListview: function(recipeData) {
         $('#recipe-list').empty();
         $.each(recipeData.data, function(i, row) {
-            $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+            $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class="ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
             $('#recipe-list').listview('refresh');
         });
 
@@ -463,7 +499,7 @@ var CHEFSHUB = {
             recipeParseJSON: function(result) {
                 recipeInfo.result = result['data'];
                 $.each(result['data'], function(i, row) {
-                    $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a> <p class="like-button-padding"><button class="like-button" data-id="' + row.id + '">Like Recipe</button></p></li>');
+                    $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class="ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a> <p class="like-button-padding"><button class="like-button" data-id="' + row.id + '">Like Recipe</button></p></li>');
                 });
                 $('#recipe-list').listview('refresh');
             }
