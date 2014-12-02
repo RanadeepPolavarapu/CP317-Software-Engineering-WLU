@@ -200,9 +200,6 @@ var CHEFSHUB = {
             case "most-recent-date-added":
                 CHEFSHUB.sortByDateAdded();
                 break;
-            case "cuisine-category":
-                //Sort by cuisine category
-                break;
             case "lowest-prep-time":
                 //Sort by prep time
                 break;
