@@ -292,6 +292,21 @@ var CHEFSHUB = {
         });
     },
 
+    likeRecipe: function(recipeId) {
+        var ajaxLikeRecipeRoute = 'http://cp317.ff.gg/api/recipe/like_recipe.json/';
+
+        $.ajax({
+            type: "GET", // Make a GET request.
+            url: ajaxLikeRecipeRoute,
+            data: {recipe_id: recipeId},
+            success: function(response) {
+                if (response['success']) {
+                    alert("Recipe liked success!");
+                }
+            },
+        });
+    },
+
     indexPageFetchDataByCreateTime: function() {
         $(document).on('pageinit', '#home', function() {
             var url = 'http://cp317.ff.gg/api/recipe/get_recent.json/';
@@ -305,7 +320,8 @@ var CHEFSHUB = {
 
                     // Bind click event to like buttons.
                     $('.like-button').click(function() {
-                        alert('like clicked' + $(this).attr('data-id'));
+                        CHEFSHUB.likeRecipe($(this).attr('data-id'));
+                        $(this).text("Liked!");
                         $(this).attr('disabled','disabled');
                     });
                 },
