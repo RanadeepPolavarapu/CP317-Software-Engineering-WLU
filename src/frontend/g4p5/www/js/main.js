@@ -298,7 +298,9 @@ var CHEFSHUB = {
         $.ajax({
             type: "GET", // Make a GET request.
             url: ajaxLikeRecipeRoute,
-            data: {recipe_id: recipeId},
+            data: {
+                recipe_id: recipeId
+            },
             success: function(response) {
                 if (response['success']) {
                     alert("Recipe liked success!");
@@ -322,7 +324,7 @@ var CHEFSHUB = {
                     $('.like-button').click(function() {
                         CHEFSHUB.likeRecipe($(this).attr('data-id'));
                         $(this).text("Liked!");
-                        $(this).attr('disabled','disabled');
+                        $(this).attr('disabled', 'disabled');
                     });
                 },
                 error: function(request, error) {
