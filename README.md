@@ -25,7 +25,7 @@ Deadlines
 *  [✔] Submit a signed statement describing the contribution of each individual by Thursday, Nov. 27 at 4 PM. 
 *  [✔] Complete app implementation by Monday, Dec. 1 at 11:30 PM.
 *  [✔] Submit final implementation in **.zip** format into MyLearningSpace dropbox by Monday, Dec. 1 at 11:30 PM.
-*  [✖] App Presentation in class on Tuesday, Dec. 2 at 4 PM.
+*  [✔] App Presentation in class on Tuesday, Dec. 2 at 4 PM.
 
 Backend Server
 -------------
