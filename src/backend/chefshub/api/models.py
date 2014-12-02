@@ -11,8 +11,8 @@ import time
 class CHUser(models.Model):
 	id = models.BigIntegerField(primary_key=True, db_index=True)
 	user = models.ForeignKey(User, verbose_name="the User class of this CHUser", blank=True, null=True, on_delete=models.CASCADE)
-	json_liked_recipes = models.TextField("Recipes liked (favourited) by this CHUser in JSON format", blank=True)
-	json_recipe_rating = models.TextField("Recipes rated by this CHUser in JSON format", blank=True)
+	json_liked_recipes = models.TextField("Recipes liked (favourited) by this CHUser in JSON format", default='[]')
+	json_recipe_rating = models.TextField("Recipes rated by this CHUser in JSON format", default='[]')
 	meta_last_modified = models.DateTimeField(auto_now=True)
 	meta_date_created = models.DateTimeField(auto_now_add=True)
 	

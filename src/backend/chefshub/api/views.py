@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 from api.models import *
 
-import requests, urllib
+import requests, urllib, json
 
 # Create your views here.
 
@@ -174,6 +174,63 @@ def ajax_get_statistics(request):
 	data = {'success': True, 'data': {}}
 	data['data'] = {'Recipe': total_recipes, 'CHUser': total_chusers, 'User': total_users}
 	return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def ajax_like_recipe(request):
+	if request.method == 'POST' and request.user.is_authenticated():
+		recipe_id = request.POST.get('recipe_id', '').strip()
+		data = {'success': True, 'data': {}}
+		
+		if recipe_id == '':
+			data = {'success': False, 'error': True, 'errormsg': 'Empty recipe id'}
+			return JsonResponse(data, safe=False)
+			
+		recipe_id = int(recipe_id)
+		try:
+			user = CHUser.objects.get(pk=request.user.id)
+			json_liked_recipes = json.loads(user.json_liked_recipes)
+			if not Recipe.objects.filter(pk=recipe_id).exists():
+				data = {'success': False, 'error': True, 'errormsg': 'Invalid recipe id'}
+				return JsonResponse(data, safe=False)
+			json_liked_recipes.append(recipe_id)
+			user.json_liked_recipes = json.dumps(list(set(json_liked_recipes)))
+			user.save()
+			
+			result = {}
+			for field in user._meta.fields:
+				result[field.name] = field.value_from_object(user)
+			data['data'] = {'CH_user_data': result}
+		except Exception as e:
+			data = {'success': False, 'error': True, 'errormsg': str(e)}
+		return JsonResponse(data, safe=False)
+	elif request.method == 'GET' and request.user.is_authenticated():
+		recipe_id = request.GET.get('recipe_id', '').strip()
+		data = {'success': True, 'data': {}}
+				
+		if recipe_id == '':
+			data = {'success': False, 'error': True, 'errormsg': 'Empty recipe id'}
+			return JsonResponse(data, safe=False)
+			
+		recipe_id = int(recipe_id)
+		try:
+			user = CHUser.objects.get(pk=request.user.id)
+			json_liked_recipes = json.loads(user.json_liked_recipes)
+			if not Recipe.objects.filter(pk=recipe_id).exists():
+				data = {'success': False, 'error': True, 'errormsg': 'Invalid recipe id'}
+				return JsonResponse(data, safe=False)
+			json_liked_recipes.append(recipe_id)
+			user.json_liked_recipes = json.dumps(list(set(json_liked_recipes)))
+			user.save()
+			
+			result = {}
+			for field in user._meta.fields:
+				result[field.name] = field.value_from_object(user)
+			data['data'] = {'CH_user_data': result}
+		except Exception as e:
+			data = {'success': False, 'error': True, 'errormsg': str(e)}
+		return JsonResponse(data, safe=False)
+	# Request method is not GET or POST but another HTTP method or one of username or password is missing
+	return JsonResponse( {'success': False, 'error': True, 'errormsg': 'Invalid HTTP Method or params are missing.'} , safe=False)
 
 @csrf_exempt
 def ajax_create_recipe(request):
