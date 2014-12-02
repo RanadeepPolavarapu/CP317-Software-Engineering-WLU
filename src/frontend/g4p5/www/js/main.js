@@ -192,6 +192,23 @@ var CHEFSHUB = {
         }
     },
 
+	sortRecipes: function(option) {
+		switch(option) {
+			case "Difficulty":
+				//Sort by difficulty
+				break;
+			case "Date Added":
+				//Sort by date added
+				break;
+			case "Cuisine Category":
+				//Sort by cuisine category
+				break;
+			case "Prep Time":
+				//Sort by prep time
+				break;
+		}
+	}
+	
     searchRecipe: function() {
         // Fill recipe-list with recipes matching search result
         // Fill recipe-data with recipe selected
