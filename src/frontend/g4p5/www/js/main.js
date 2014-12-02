@@ -194,18 +194,24 @@ var CHEFSHUB = {
 
     sortRecipes: function(option) {
         switch (option) {
-            case "difficulty":
+            case "lowest-difficulty":
                 CHEFSHUB.sortByDifficulty();
                 break;
-            case "date-added":
-                //Sort by date added
+            case "most-recent-date-added":
+                CHEFSHUB.sortByDateAdded();
                 break;
             case "cuisine-category":
                 //Sort by cuisine category
                 break;
-            case "prep-time":
+            case "lowest-prep-time":
                 //Sort by prep time
                 break;
+            case "highest-rating":
+                //Sort by prep time
+                break;
+            default:
+                // Null case. Case not found.
+                console.log("Error: null case. Ran out of options.");
         }
     },
 
@@ -228,11 +234,11 @@ var CHEFSHUB = {
     },
 
     sortByDateAdded: function() {
-        var leastDifficultRecipeURLRoute = 'http://cp317.ff.gg/api/recipe/get_least_difficult.json';
+        var mostRecentUploadTimeURLRoute = 'http://cp317.ff.gg/api/recipe/get_recent.json';
 
         $.ajax({
             type: "GET", // Make a GET request.
-            url: leastDifficultRecipeURLRoute,
+            url: mostRecentUploadTimeURLRoute,
             success: function(response) {
                 if (response['success']) {
                     $('#recipe-list').empty();
