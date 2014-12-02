@@ -117,7 +117,12 @@ def ajax_auth_is_authenticated(request):
 		result = {}
 		for field in request.user._meta.fields:
 			result[field.name] = field.value_from_object(request.user)
-		return JsonResponse( {'success': True, 'data': {'is_authenticated': True, 'user_data': result}} , safe=False)
+		
+		ch_user_result = {}
+		ch_user = CHUser.objects.get(pk=request.user.pk)
+		for field in ch_user._meta.fields:
+			ch_user_result[field.name] = field.value_from_object(ch_user)
+		return JsonResponse( {'success': True, 'data': {'is_authenticated': True, 'user_data': result, 'CH_user_data': ch_user_result}} , safe=False)
 	else:
 		return JsonResponse( {'success': False, 'data': {'is_authenticated': False}} , safe=False)
 
@@ -129,6 +134,58 @@ def ajax_auth_logout(request):
 @csrf_exempt
 def ajax_get_recent_recipes(request):
 	list = Recipe.objects.all().order_by('-id')[:100]
+	data = {'success': True, 'data': []}
+	for item in list:
+		result = {}
+		for field in item._meta.fields:
+			result[field.name] = field.value_from_object(item)
+		result['owner'] = User.objects.get(pk=int(result['user'])).username
+		result['photo'] = str(result['photo'])
+		data['data'].append(result)
+	return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def ajax_get_top_rated_recipes(request):
+	list = Recipe.objects.all().order_by('-rating')[:100]
+	data = {'success': True, 'data': []}
+	for item in list:
+		result = {}
+		for field in item._meta.fields:
+			result[field.name] = field.value_from_object(item)
+		result['owner'] = User.objects.get(pk=int(result['user'])).username
+		result['photo'] = str(result['photo'])
+		data['data'].append(result)
+	return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def ajax_get_top_rated_recipes(request):
+	list = Recipe.objects.all().order_by('-rating')[:100]
+	data = {'success': True, 'data': []}
+	for item in list:
+		result = {}
+		for field in item._meta.fields:
+			result[field.name] = field.value_from_object(item)
+		result['owner'] = User.objects.get(pk=int(result['user'])).username
+		result['photo'] = str(result['photo'])
+		data['data'].append(result)
+	return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def ajax_get_most_serving_recipes(request):
+	list = Recipe.objects.all().order_by('-serving_value')[:100]
+	data = {'success': True, 'data': []}
+	for item in list:
+		result = {}
+		for field in item._meta.fields:
+			result[field.name] = field.value_from_object(item)
+		result['owner'] = User.objects.get(pk=int(result['user'])).username
+		result['photo'] = str(result['photo'])
+		data['data'].append(result)
+	return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def ajax_get_least_difficult_recipes(request):
+	list = Recipe.objects.all().order_by('difficulty')[:100]
 	data = {'success': True, 'data': []}
 	for item in list:
 		result = {}

@@ -12,23 +12,13 @@ urlpatterns = patterns('',
 	url(r'^auth/user/logout.json/?$', views.ajax_auth_logout),
 
 	url(r'^recipe/get_recent.json/?$', views.ajax_get_recent_recipes),
+	url(r'^recipe/get_top_rated.json/?$', views.ajax_get_top_rated_recipes),
+	url(r'^recipe/get_least_difficult.json/?$', views.ajax_get_least_difficult_recipes),
+	url(r'^recipe/get_most_serving_value.json/?$', views.ajax_get_most_serving_recipes),
 	url(r'^recipe/search.json/?$', views.ajax_search_recipes),
 	url(r'^recipe/create_recipe.json/?$', views.ajax_create_recipe),
 	url(r'^recipe/like_recipe.json/?$', views.ajax_like_recipe),
 	url(r'^recipe/photourl_to_imagefield.json/?$', views.ajax_convert_photoURL_to_ImageField),
 	url(r'^recipe/statistics.json/?$', views.ajax_get_statistics),
-
-
-
-#     url(r'^ajax/update.json/?$', views.ajax_update_official_api),
-# 	url(r'^ajax/register.json/?$', views.ajax_register_official_api),
-# 	# Debug purposes.
-# 	url(r'^debug/ajax/update.json/?$', views.debug_ajax_update),
-# 	url(r'^debug/ajax/summoner/?$', views.debug_ajax_summoner),
-# 	url(r'^debug/ajax/leagues/?$', views.debug_ajax_leagues),
-# 	url(r'^debug/ajax/game/?$', views.debug_ajax_game),
-# 	url(r'^debug/ajax/team/?$', views.debug_ajax_team),
-# 	# Get more games JSON route.
-# 	url(r'^ajax/matches.json/?$', views.ajax_get_more_matches),
-#     url(r'^(?P<region>\w+)/(?P<summoner_name_or_id>[\w\ +]+)/?$', views.summoner_profile_page, name='summoner'),
+	
 )
