@@ -180,9 +180,9 @@ var CHEFSHUB = {
                 url: isAuthenticatedURLRoute,
                 success: function(response) {
                     if (response['success']) {
-                        $("#verified-user").append('<h4><u>User Verified</u></h4> <p>Logged in as: ' + response['data']['user_data']['username'] + '.');
+                        $("#verified-user").append('<h4><u>User Verified</u></h4> <p>Logged in as: ' + response['data']['user_data']['username'] + '. <br>Liked: ' + JSON.parse(response['data']['CH_user_data']['json_liked_recipes']).length + ' recipies.');
                         $("#sign-in-button").replaceWith('<button onclick="CHEFSHUB.User.userLogout();" data-theme="b" id="sign-in-button" class="ui-btn-right ui-btn ui-btn-b ui-shadow ui-corner-all"><i class="user icon"></i>Logout</button>');
-
+                        CHEFSHUB.checkLikedRecipes(response);
                     } else {
                         $("#verified-user").append('<h5>User not logged in. <br>Please sign in.</h5>');
                         $("#sign-in-button").replaceWith('<button onclick="window.location.replace(\'login-or-register.html\');" data-theme="b" id="sign-in-button" class="ui-btn-right ui-btn ui-btn-b ui-shadow ui-corner-all"><i class="signup icon"></i>Sign In</button>');
@@ -192,23 +192,23 @@ var CHEFSHUB = {
         }
     },
 
-	sortRecipes: function(option) {
-		switch(option) {
-			case "Difficulty":
-				//Sort by difficulty
-				break;
-			case "Date Added":
-				//Sort by date added
-				break;
-			case "Cuisine Category":
-				//Sort by cuisine category
-				break;
-			case "Prep Time":
-				//Sort by prep time
-				break;
-		}
-	}
-	
+    sortRecipes: function(option) {
+        switch (option) {
+            case "Difficulty":
+                //Sort by difficulty
+                break;
+            case "Date Added":
+                //Sort by date added
+                break;
+            case "Cuisine Category":
+                //Sort by cuisine category
+                break;
+            case "Prep Time":
+                //Sort by prep time
+                break;
+        }
+    },
+
     searchRecipe: function() {
         // Fill recipe-list with recipes matching search result
         // Fill recipe-data with recipe selected
@@ -320,9 +320,44 @@ var CHEFSHUB = {
             },
             success: function(response) {
                 if (response['success']) {
-                    alert("Recipe liked success!");
+                    var CHUserData = response['data']['CH_user_data'];
+                    JSONLikedRecipes = JSON.parse(CHUserData['json_liked_recipes']);
+                    totalLikedRecipes = JSONLikedRecipes.length;
+                    noty({
+                        text: 'Recipe has been successfully liked! <br>You have a total of ' + totalLikedRecipes + ' liked recipies.',
+                        type: 'success',
+                        timeout: true,
+                        animation: {
+                            open: 'animated bounceInLeft', // Animate.css class names
+                            close: 'animated bounceOutLeft', // Animate.css class names
+                            easing: 'swing', // unavailable - no need
+                            speed: 500 // unavailable - no need
+                        }
+                    });
+                } else {
+                    noty({
+                        text: '<span style="color: black;">Error: Please login to like recipies.</span>',
+                        type: 'error',
+                        timeout: true,
+                        animation: {
+                            open: 'animated bounceInLeft', // Animate.css class names
+                            close: 'animated bounceOutLeft', // Animate.css class names
+                            easing: 'swing', // unavailable - no need
+                            speed: 500 // unavailable - no need
+                        }
+                    });
                 }
             },
+        });
+    },
+
+    checkLikedRecipes: function(data) {
+        $(function() {
+            var CHUserData = data['data']['CH_user_data'];
+            JSONLikedRecipes = JSON.parse(CHUserData['json_liked_recipes']);
+            for (i = 0; i < JSONLikedRecipes.length; i++) {
+                $('button.like-button').remove();
+            }
         });
     },
 
