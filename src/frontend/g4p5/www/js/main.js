@@ -194,19 +194,55 @@ var CHEFSHUB = {
 
     sortRecipes: function(option) {
         switch (option) {
-            case "Difficulty":
-                //Sort by difficulty
+            case "difficulty":
+                CHEFSHUB.sortByDifficulty();
                 break;
-            case "Date Added":
+            case "date-added":
                 //Sort by date added
                 break;
-            case "Cuisine Category":
+            case "cuisine-category":
                 //Sort by cuisine category
                 break;
-            case "Prep Time":
+            case "prep-time":
                 //Sort by prep time
                 break;
         }
+    },
+
+    sortByDifficulty: function() {
+        var leastDifficultRecipeURLRoute = 'http://cp317.ff.gg/api/recipe/get_least_difficult.json';
+
+        $.ajax({
+            type: "GET", // Make a GET request.
+            url: leastDifficultRecipeURLRoute,
+            success: function(response) {
+                if (response['success']) {
+                    $('#recipe-list').empty();
+                    $.each(response.data, function(i, row) {
+                        $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p>Difficulty: ' + row.difficulty + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+                        $('#recipe-list').listview('refresh');
+                    });
+                }
+            },
+        });
+    },
+
+    sortByDateAdded: function() {
+        var leastDifficultRecipeURLRoute = 'http://cp317.ff.gg/api/recipe/get_least_difficult.json';
+
+        $.ajax({
+            type: "GET", // Make a GET request.
+            url: leastDifficultRecipeURLRoute,
+            success: function(response) {
+                if (response['success']) {
+                    $('#recipe-list').empty();
+                    $.each(response.data, function(i, row) {
+                        $('#recipe-list').append('<li><a href="" data-id="' + row.id + '"><img src="http://m.cdn.cp317.ff.gg/' + row.photo + '" class="listview-image-centered"/><h3>' + row.recipe_name + '</h3><p class="ui-li-desc">Rating: ' + row.rating + '/5</p><p class=""ui-li-desc">Published: ' + jQuery.timeago(row.meta_date_created) + '</p><p>Difficulty: ' + row.difficulty + '</p><p class="ui-li-desc">Author: ' + row.owner + '</p></a></li>');
+                        $('#recipe-list').listview('refresh');
+                    });
+                }
+            },
+        });
     },
 
     searchRecipe: function() {

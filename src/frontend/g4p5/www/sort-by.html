@@ -65,14 +65,19 @@
             <button onclick="window.location.replace('login-or-register.html');" data-theme="b" id="sign-in-button"><i class="signup icon"></i>Sign In</button>
         </div>
         <div data-role="content">
-            <select name="sort-by" onchange="sortRecipes(this.value)">
-				<option value="">Sort By..</option>
-				<option value="difficulty">Difficulty</option>
-				<option value="date">Date Added</option>
-				<option value="cuisine">Cuisine Category</option>
-				<option value="prep-time">Prep Time</option>
-			</select>
+            <select name="sort-by" onchange="CHEFSHUB.sortRecipes(this.value);">
+                <option value="">Sort by...</option>
+                <option value="difficulty">Difficulty</option>
+                <option value="date-added">Date Added</option>
+                <option value="cuisine-category">Cuisine Category</option>
+                <option value="prep-time">Prep Time</option>
+            </select>
             <div class="recipe-search-listview-wrapper" data-iscroll>
+                <form class="ui-listview-filter ui-bar-c ui-listview-filter-inset" role="search">
+                    <div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield ui-body-c">
+                        <input placeholder="Search fruits..." data-type="search" class="ui-input-text ui-body-c"><a href="#" class="ui-input-clear ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-fullsize ui-btn-icon-notext ui-input-clear-hidden" title="clear text" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="delete" data-iconpos="notext" data-theme="c" data-mini="false"><span class="ui-btn-inner"><span class="ui-btn-text">clear text</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+                    </div>
+                </form>
                 <ul data-role="listview" id="recipe-list" data-theme="a">
 
                 </ul>
@@ -91,6 +96,7 @@
                 <div id="left-panel-navigation">
                     <hr>
                     <a href="#" onclick="window.location.replace('index.html');" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="home" data-iconpos="right">Home Page</a>
+                    <a href="#" onclick="window.location.replace('search-results.html');" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="search" data-iconpos="right">Search Page</a>
                     <a href="#" onclick="window.location.replace('create-recipe.html');" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="plus" data-iconpos="right">Create Recipe</a>
                     <hr>
                 </div>
@@ -129,8 +135,7 @@
     <script type="text/javascript">
         CHEFSHUB.User.userAuthenticationCheck();
         CHEFSHUB.getChefsHubStatistics();
-        CHEFSHUB.searchRecipe();
-		    CHEFSHUB.sortRecipes();
+        CHEFSHUB.sortRecipes();
     </script>
 </body>
 
