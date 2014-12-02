@@ -3,6 +3,8 @@ CP317 Final Project
 
 WLU CP 317 Final Project
 
+[Video](https://www.youtube.com/watch?v=UAPcjN_2L6Y)
+
 #####By: Ranadeep Polavarapu, Bruno Salapic, Lee Glendenning, Ryan Burke
 
 Checklist
