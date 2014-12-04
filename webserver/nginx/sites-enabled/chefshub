@@ -43,10 +43,13 @@ server {
     location / {
         alias /home/cp317/productionenv/static/;
     }
-
+    
     expires 365d; # 1w means one (1) week (604800 seconds).
 
     add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+
+    add_header Content-Type "application/octet-stream";
+    add_header Content-Disposition "attachment";
 
     add_header Access-Control-Allow-Origin "*";
     add_header Vary "Accept-Encoding";
