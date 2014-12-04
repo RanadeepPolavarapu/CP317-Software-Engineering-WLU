@@ -1,7 +1,7 @@
 CP317 Final Project
 ==================
 
-WLU CP 317 Final Project
+Wilfrid Laurier University (WLU) class CP317 Final Project
 
 App Preview: [Video](https://www.youtube.com/watch?v=UAPcjN_2L6Y).
 
