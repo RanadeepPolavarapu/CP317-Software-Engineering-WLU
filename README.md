@@ -19,10 +19,9 @@ Backend
 -------------
 * nginx - Our primary webserver, acts as a reverse proxy with gunicorn, directly serves our static and media files. ([See our nginx files](webserver/nginx)).
 * gunicorn - Python WSGI app server for Django.
-* Django framework - For creating an API.
+* Django framework - For creating an API for this app that the frontend can consume.
 * PostgreSQL - our backend DB that is linked to Django.
 * Python 3.4 with `virtualenv` to ensure that we can box and ship the backend with ease should we wish to do so.
-* 
 
 Checklist
 =========
