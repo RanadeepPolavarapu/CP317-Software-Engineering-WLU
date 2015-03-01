@@ -11,7 +11,7 @@ server {
     }
 
     location  /robots.txt {
-        alias  /home/cp317/lolprodenv/static/robots.txt;
+        alias  /home/cp317/productionenv/static/robots.txt;
     }
 
     location /humans.txt {
