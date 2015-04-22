@@ -1,4 +1,4 @@
-CP317-WLU
+eCP317-WLU
 ==================
 
 Wilfrid Laurier University (WLU) class CP317 all related work (assignments & final project).
