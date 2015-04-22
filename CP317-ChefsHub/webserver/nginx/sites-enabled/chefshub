@@ -1,0 +1,89 @@
+server {
+    listen 80;
+    server_name localhost;
+
+    access_log off;
+
+    location / {
+        proxy_pass http://127.0.0.1:8001;
+        proxy_set_header X-Forwarded-Host $server_name;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location  /robots.txt {
+        alias  /home/cp317/productionenv/static/robots.txt;
+    }
+
+    location /humans.txt {
+        alias /home/cp317/productionenv/static/humans.txt;
+    }
+
+    location /crossdomain.xml {
+        alias /home/cp317/productionenv/static/crossdomain.xml;
+    }
+
+    add_header Access-Control-Allow-Origin "*";
+    add_header Vary "Accept-Encoding";
+    add_header X-Project "Wilfrid Laurier University - Department of Physics & Computer Science: CP317-A Final Project.";
+    add_header X-Description "API for CP317 ChefsHub Application.";
+    add_header X-Authors "CP317-A - Group #4: Ranadeep Polavarapu, Bruno Salapic, Lee Glendenning, Ryan Burke.";
+}
+
+server {
+    listen 80;
+    server_name s.cdn.cp317.ff.gg;
+
+    access_log off;
+    log_not_found off;
+
+    location /static/ {
+        alias /home/cp317/productionenv/static/;
+    }
+
+    location / {
+        alias /home/cp317/productionenv/static/;
+    }
+    
+    expires 365d; # 1w means one (1) week (604800 seconds).
+
+    add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+
+    add_header Content-Type "application/octet-stream";
+    add_header Content-Disposition "attachment";
+
+    add_header Access-Control-Allow-Origin "*";
+    add_header Vary "Accept-Encoding";
+
+    add_header X-Description "Static Content Delivery Network (sCDN) for CP317 ChefsHub Application";
+    add_header X-Project "Wilfrid Laurier University - Department of Physics & Computer Science: CP317-A Final Project.";
+    add_header X-Description "API for CP317 ChefsHub Application.";
+    add_header X-Authors "CP317-A - Group #4: Ranadeep Polavarapu, Bruno Salapic, Lee Glendenning, Ryan Burke.";
+}
+
+server {
+    listen 80;
+    server_name m.cdn.cp317.ff.gg;
+
+    access_log off;
+    log_not_found off;
+
+    location /media/ {
+        alias /home/cp317/productionenv/media/;
+    }
+
+    location / {
+        alias /home/cp317/productionenv/media/;
+    }
+
+    expires 365d; # 1w means one (1) week (604800 seconds).
+
+    add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+
+    add_header Access-Control-Allow-Origin "*";
+    add_header Vary "Accept-Encoding";
+
+    add_header X-Description "Media Content Delivery Network (mCDN) for CP317 ChefsHub Application";
+    add_header X-Project "Wilfrid Laurier University - Department of Physics & Computer Science: CP317-A Final Project.";
+    add_header X-Description "API for CP317 ChefsHub Application.";
+    add_header X-Authors "CP317-A - Group #4: Ranadeep Polavarapu, Bruno Salapic, Lee Glendenning, Ryan Burke.";
+}
